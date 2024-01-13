@@ -5,10 +5,15 @@ website:
   title: "ISSS608-VAA"
   navbar:
     left:
-      - text: "Hands-on Exercise"
-        menu: 
-          - text: "Hands-on Exercise 1"
-            href: "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html"
+    - text: "Hands-on Exercise"
+      menu: 
+        - text: "Hands-on Exercise 1"
+          href: "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html"
+    - text: "In-class Exercise"
+      menu: 
+        - text: "In-class Exercise 1"
+          href: "In-class_Ex/In-class_Ex01/In-class_Ex01.html"
+
     right: 
       - href: index.qmd
         text: Home
