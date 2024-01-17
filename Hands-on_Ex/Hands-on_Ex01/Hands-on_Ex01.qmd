@@ -1,6 +1,11 @@
 ---
 title: "Hands-on Exercise 1"
 author: "Zhang Shujie"
+execute: 
+  eval: true
+  echo: true
+  warning: false
+editor: visual
 ---
 
 # Getting Started
@@ -19,10 +24,336 @@ pacman::p_load(tidyverse)
 exam_data <- read_csv("data/Exam_data.csv")
 ```
 
-# Plotting a simple bar chart
+# Introducing ggplot
+
+ggplot2 is an R package for declaratively creating data-driven graphics based on The Grammar of Graphics.
+
+## R Graphics VS ggplot
+
+::: panel-tabset
+### R Graphics
 
 ```{r}
-ggplot(data = exam_data,
-       aes(x=RACE))+
-  geom_bar()
+hist(exam_data$MATHS)
+```
+
+### ggplot2
+
+```{r}
+ggplot(data=exam_data, aes(x = MATHS)) +
+  geom_histogram(bins=10, 
+                 boundary = 100,
+                 color="black", 
+                 fill="grey") +
+  ggtitle("Distribution of Maths scores")
+```
+:::
+
+## Grammar of Graphics
+
+Figure below shows the seven grammars of ggplot2.
+
+![](Layered%20Grammar.png){width="576"}
+
+A short description of each building block are as follows:
+
+-   Data: The dataset being plotted.
+
+-   Aesthetics take attributes of the data and use them to influence visual characteristics, such as position, colours, size, shape, or transparency.
+
+-   Geometrics: The visual elements used for our data, such as point, bar or line.
+
+-   Facets split the data into subsets to create multiple variations of the same graph (paneling, multiple plots).
+
+-   Statistics, statiscal transformations that summarise data (e.g. mean, confidence intervals).
+
+-   Coordinate systems define the plane on which data are mapped on the graphic.
+
+-   Themes modify all non-data components of a plot, such as main title, sub-title, y-aixs title, or legend background.
+
+# Essential Grammatical Elements in ggplot2: data
+
+```{r}
+ggplot(data=exam_data)
+```
+
+-   A blank canvas appears.
+
+-   ggplot() initializes a ggplot object.
+
+-   The data argument defines the dataset to be used for plotting.
+
+-   If the dataset is not already a data.frame, it will be converted to one by fortify().
+
+# Essential Grammatical Elements in ggplot2: Aesthetic mappings
+
+Code chunk below adds the aesthetic element into the plot. ggplot includes the x-axis and the axis’s label.
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS))
+```
+
+# Essential Grammatical Elements in ggplot2: geom
+
+## Geometric Objects: geom_bar
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS))
+```
+
+## Geometric Objects: geom_dotplot
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x = MATHS)) +
+  geom_dotplot(dotsize = 0.5)
+```
+
+The code chunk below performs the following two steps: - scale_y_continuous() is used to turn off the y-axis, and - binwidth argument is used to change the binwidth to 2.5.
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x = MATHS)) +
+  geom_dotplot(binwidth=2.5,         
+               dotsize = 0.5) +      
+  scale_y_continuous(NULL,           
+                     breaks = NULL)  
+```
+
+## Geometric Objects: geom_histogram()
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x = MATHS)) +
+  geom_histogram()       
+```
+
+Note that the default bin is 30.
+
+## Modifying a geometric object by changing geom()
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS)) +
+  geom_histogram(bins=20,            
+                 color="black",      
+                 fill="light blue")       
+```
+
+## Modifying a geometric object by changing aes()
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS, 
+           fill = GENDER)) +
+  geom_histogram(bins=20, 
+                 color="grey30")    
+```
+
+## Geometric Objects: geom-density()
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x = MATHS)) +
+  geom_density()   
+```
+
+## Geometric Objects: geom_boxplot()
+
+```{r}
+ggplot(data=exam_data, 
+       aes(y = MATHS,       
+           x= GENDER)) +    
+  geom_boxplot()            
+```
+
+The code chunk below plots the distribution of Maths scores by gender in notched plot instead of boxplot.
+
+```{r}
+ggplot(data=exam_data, 
+       aes(y = MATHS, 
+           x= GENDER)) +
+  geom_boxplot(notch=TRUE)           
+```
+
+## Geometric Objects: geom_violin
+
+```{r}
+ggplot(data=exam_data, 
+       aes(y = MATHS, 
+           x= GENDER)) +
+  geom_violin()       
+```
+
+## Geometric Objects: geom_point()
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS, 
+           y=ENGLISH)) +
+  geom_point()            
+```
+
+## geom objects can be combined
+
+```{r}
+ggplot(data=exam_data, 
+       aes(y = MATHS, 
+           x= GENDER)) +
+  geom_boxplot() +                    
+  geom_point(position="jitter", 
+             size = 0.5)                   
+```
+
+# Essential Grammatical Elements in ggplot2: stat
+
+-   add a stat\_() function and override the default geom.
+-   add a geom\_() function and override the default stat.
+
+## Working with stat()
+
+The boxplots below are incomplete because the positions of the means were not shown.
+
+```{r}
+ggplot(data=exam_data, 
+       aes(y = MATHS, x= GENDER)) +
+  geom_boxplot()           
+```
+
+## Working with stat - the stat_summary() method
+
+```{r}
+ggplot(data=exam_data, 
+       aes(y = MATHS, x= GENDER)) +
+  geom_boxplot() +
+  stat_summary(geom = "point",       
+               fun.y="mean",         
+               colour ="red",        
+               linewidth=4)                         
+```
+
+## Working with stat - the geom() method
+
+```{r}
+ggplot(data=exam_data, 
+       aes(y = MATHS, x= GENDER)) +
+  geom_boxplot() +
+  geom_point(stat="summary",        
+             fun.y="mean",           
+             colour ="red",          
+             linewidth=4)                                 
+```
+
+## Adding a best fit curve on a scatterplot - geom_smooth()
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS, y=ENGLISH)) +
+  geom_point() +
+  geom_smooth(size=0.5)                               
+```
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS, 
+           y=ENGLISH)) +
+  geom_point() +
+  geom_smooth(method=lm, 
+              size=0.5)                              
+```
+
+# Essential Grammatical Elements in ggplot2: Facets
+
+Facetting generates small multiples (sometimes also called trellis plot), each displaying a different subset of the data.
+
+**facet_grid() and facet_wrap**
+
+## Working with facet_wrap()
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS)) +
+  geom_histogram(bins=20) +
+    facet_wrap(~ CLASS)                
+```
+
+## facet_grid() function
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS)) +
+  geom_histogram(bins=20) +
+    facet_grid(~ CLASS)            
+```
+
+# Essential Grammatical Elements in ggplot2: Coordinates
+
+## Working with Coordinate
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x=RACE)) +
+  geom_bar()          
+```
+
+coord_flip()
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x=RACE)) +
+  geom_bar() +
+  coord_flip()         
+```
+
+## Changing the y- and x-axis range
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS, y=ENGLISH)) +
+  geom_point() +
+  geom_smooth(method=lm, linewidth=0.5)  
+```
+
+The code below fixed both the y-axis and x-axis range from 0-100.
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x= MATHS, y=ENGLISH)) +
+  geom_point() +
+  geom_smooth(method=lm, 
+              size=0.5) +  
+  coord_cartesian(xlim=c(0,100),
+                  ylim=c(0,100))
+```
+
+# Essential Grammatical Elements in ggplot2: themes
+
+- theme_gray() (default) - theme_bw() - theme_classic()
+
+## Working with theme
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x=RACE)) +
+  geom_bar() +
+  coord_flip() +
+  theme_gray()
+```
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x=RACE)) +
+  geom_bar() +
+  coord_flip() +
+  theme_classic()
+```
+
+```{r}
+ggplot(data=exam_data, 
+       aes(x=RACE)) +
+  geom_bar() +
+  coord_flip() +
+  theme_minimal()
 ```
