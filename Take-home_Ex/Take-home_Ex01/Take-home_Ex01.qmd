@@ -9,21 +9,6 @@ execute:
 editor: visual
 ---
 
-```{=html}
-<style>
-details.custom-block {
-  border: 1px solid #aaa;
-  border-radius: 4px;
-  padding: 0.5em;
-  background-color: #f9f9f9;
-}
-
-summary.custom-block-summary {
-  font-weight: bold;
-  color: #333;
-}
-</style>
-```
 # Project Brief
 
 While Singapore has made strides in reducing disparities in family wealth, its education policy is committed to ensuring high-quality education in every school. However, the general public still perceives persistent educational inequalities, especially between elite and ordinary community schools, as well as among students from different socioeconomic backgrounds and immigrant families. We will delve deeply into the state of education in Singapore, based on the data provided by the 2022 Programme for International Student Assessment (PISA).
@@ -62,7 +47,6 @@ We use the `pacman::p_load()` function to load the required R packages into our 
 
 <details class="custom-block">
 <summary class="custom-block-summary">Code Block</summary>
-
 ``` r
 pacman::p_load(tidyverse, ggplot2, dplyr, readr, ggpubr,
 scales,forcats, gridExtra, corrplot, Hmisc, lubridate)

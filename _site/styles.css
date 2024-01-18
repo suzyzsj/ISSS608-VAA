@@ -1,1 +1,17 @@
 /* css styles */
+
+pre.sourceCode {
+  background-color: #f8f8f8; 
+}
+
+details.custom-block {
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  padding: 0.5em;
+  background-color: #f9f9f9;
+}
+
+summary.custom-block-summary {
+  font-weight: bold;
+  color: #333;
+}
