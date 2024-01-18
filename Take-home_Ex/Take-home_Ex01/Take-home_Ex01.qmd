@@ -61,12 +61,7 @@ We use the `pacman::p_load()` function to load the required R packages into our 
 -   **Hmisc**: Contains many functions useful for data analysis, such as descriptive statistics.
 
 <details class="custom-block">
-
-<summary class="custom-block-summary">
-
-Code Block
-
-</summary>
+<summary class="custom-block-summary">Code Block</summary>
 
 ``` r
 pacman::p_load(tidyverse, ggplot2, dplyr, readr, ggpubr,

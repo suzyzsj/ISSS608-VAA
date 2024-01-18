@@ -15,7 +15,7 @@ editor: visual
 The code chunk below uses p_load() of pacman package to chheck if tidyverse packages are installed in the computer.If they are, then they will be launched into R.
 
 ```{r}
-pacman::p_load(tidyverse)
+pacman::p_load(tidyverse,patchwork)
 ```
 
 ## Importing the data
@@ -134,13 +134,161 @@ Note that the default bin is 30.
 
 ## Modifying a geometric object by changing geom()
 
+In the code chunk below,
+
+-   *bins* argument is used to change the number of bins to 20
+-   *fill* argument is used to shade the histogram with color
+-   *color* argument is used to change the outline colour of the bars
+-   *geom_vline* is used to add mean and median lines
+-   *annotate* is used to include descriptions for each line
+
 ```{r}
-ggplot(data=exam_data, 
-       aes(x= MATHS)) +
-  geom_histogram(bins=20,            
-                 color="black",      
-                 fill="light blue")       
+ggplot(data=exam_data,
+       aes(x=MATHS)) + 
+    geom_histogram(bins=20, 
+                   color="grey30", 
+                   fill="#E1C8C4") +
+    labs(x = "Math Score",
+         y = "No. of Pupils",
+         title = "Distribution of Math Scores") + 
+    geom_vline(aes(xintercept=median(exam_data$MATHS, na.rm=T)),
+               color="#595DE5", linewidth=1, linetype="dashed") + 
+    # Add line annotations
+    annotate(
+      "text", 
+      x = 82, 
+      y = 50,
+      label = paste("Median =", round(median(exam_data$MATHS, na.rm=T), 3)),
+      color = "#595DE5",
+      size = 3.5
+    ) +
+    geom_vline(aes(xintercept=mean(exam_data$MATHS, na.rm=T)),
+               colour="red", linewidth=1, linetype="dashed") + 
+      # Add line annotations
+    annotate(
+      "text", 
+      x = 60, 
+      y = 42,
+      label = paste("Mean =", round(mean(exam_data$MATHS, na.rm=T), 3)),
+      color = "red",
+      size = 3.5
+    ) +
+    theme(plot.background=element_rect(fill="#f5f5f5",colour="#f5f5f5"))      
 ```
+::: panel-tabset
+### Changed no. of bins
+
+
+```{r}
+# Original
+b_p1 <- ggplot(data=exam_data, 
+       aes(x=MATHS)) +
+  geom_histogram(bins=20, 
+                 boundary = 100,
+                 #binwidth=5, 
+                 color= 'white',
+                 fill='grey') +
+  theme_gray() +
+  theme(panel.background=element_rect(fill='grey96')) +
+  labs(x = "Math Score",
+       y = "No. of Pupils",
+       title = "20 bins") +
+  theme(plot.background=element_rect(fill="#f5f5f5",colour="#f5f5f5"))
+
+# Changed
+b_p2 <- ggplot(data=exam_data, 
+       aes(x=MATHS)) +
+  geom_histogram(bins=30, 
+                 boundary = 100,
+                 #binwidth=5, 
+                 color= 'white',
+                 fill='grey') +
+  theme_gray() +
+  theme(panel.background=element_rect(fill='grey96')) +
+  labs(x = "Math Score",
+       y = "No. of Pupils",
+       title = "30 bins") +
+  theme(plot.background=element_rect(fill="#f5f5f5",colour="#f5f5f5"))
+
+# format plot layout
+b_p1 + b_p2
+```
+
+### Using binwidth
+
+```{r}
+# Original
+bw_p1 <- ggplot(data=exam_data, 
+       aes(x=MATHS)) +
+  geom_histogram(bins=20, 
+                 boundary = 100,
+                 #binwidth=5, 
+                 color= 'white',
+                 fill='grey') +
+  theme_gray() +
+  theme(panel.background=element_rect(fill='grey96')) +
+  labs(x = "Math Score",
+       y = "No. of Pupils",
+       title = "20 bins") +
+  theme(plot.background=element_rect(fill="#f5f5f5",colour="#f5f5f5"))  
+
+# Changed
+bw_p2 <- ggplot(data=exam_data, 
+       aes(x=MATHS)) +
+  geom_histogram(#bins=20, 
+                 boundary = 100,
+                 binwidth=5, 
+                 color= 'white',
+                 fill='grey') +
+  theme_gray() +
+  theme(panel.background=element_rect(fill='grey96')) +
+  labs(x = "Math Score",
+       y = "No. of Pupils",
+       title = "Binwidth 5 = 19 bins") +
+  theme(plot.background=element_rect(fill="#f5f5f5",colour="#f5f5f5"))
+
+# format plot layout
+bw_p1 + bw_p2
+```
+
+### Bin alignment using boundary & center
+
+```{r}
+# Original
+bb_p1 <- ggplot(data=exam_data, 
+       aes(x=MATHS)) +
+  geom_histogram(bins=20, 
+                 boundary = 100,
+                 #binwidth=5, 
+                 color= 'white',
+                 fill='grey') +
+  theme_gray() +
+  theme(panel.background=element_rect(fill='grey96')) +
+  labs(x = "Math Score",
+       y = "No. of Pupils",
+       title = "Bin alignment using boundary") +
+  theme(plot.background=element_rect(fill="#f5f5f5",colour="#f5f5f5"))
+  
+# Changed
+bb_p2 <- ggplot(data=exam_data, 
+       aes(x=MATHS)) +
+  geom_histogram(bins=20, 
+                 center = 50,
+                 #binwidth=5, 
+                 color= 'white',
+                 fill='grey') +
+  theme_gray() +
+  theme(panel.background=element_rect(fill='grey96')) +
+  labs(x = "Math Score",
+       y = "No. of Pupils",
+       title = "Bin alignment using center") +
+  theme(plot.background=element_rect(fill="#f5f5f5",colour="#f5f5f5"))
+
+# format plot layout
+bb_p1 + bb_p2
+```
+
+:::
 
 ## Modifying a geometric object by changing aes()
 
@@ -330,7 +478,7 @@ ggplot(data=exam_data,
 
 # Essential Grammatical Elements in ggplot2: themes
 
-- theme_gray() (default) - theme_bw() - theme_classic()
+-   theme_gray() (default) - theme_bw() - theme_classic()
 
 ## Working with theme
 
