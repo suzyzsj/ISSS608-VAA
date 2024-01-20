@@ -4,14 +4,11 @@ pre.sourceCode {
   background-color: #f8f8f8; 
 }
 
-details.custom-block {
-  border: 1px solid #aaa;
-  border-radius: 4px;
-  padding: 0.5em;
-  background-color: #f9f9f9;
-}
-
-summary.custom-block-summary {
-  font-weight: bold;
-  color: #333;
+.insightbox {
+  padding: 1em 1em 1em 2em;
+  margin-bottom: 10px;
+  border: 1.5px solid #a6a39a;
+  border-radius: 10px;
+  font-size: 18px;
+  background:  #f5f3e9 5px center/3em no-repeat;
 }
