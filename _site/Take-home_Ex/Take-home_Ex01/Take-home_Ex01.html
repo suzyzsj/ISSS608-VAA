@@ -936,10 +936,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="Take-home_Ex01_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+<p><img src="Take-home_Ex01_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="960"></p>
 </div>
 </div>
-<p>From the graph, it is evident that the performance levels of most schools in Singapore are concentrated between <code>450 and 650</code>, with only a few falling outside this range. I have marked the school IDs that fall outside this range. It can be seen that the school with an ID ending in <code>01</code> shows excellent performance in all three subjects, while schools with IDs ending in <code>115</code> and <code>149</code> exhibit relatively poor performance in all three subjects.</p>
+<p>From the graph, it is evident that the performance levels of most schools in Singapore are concentrated between <code>450 and 650</code>, with only a few falling outside this range. I have marked the school IDs that fall outside this range. It can be seen that the school with IDs ending in <code>01</code>、<code>40</code>、<code>82</code>、<code>101</code>、<code>199</code>、<code>155</code>shows excellent performance in all three subjects, while schools with IDs ending in <code>115</code> and <code>149</code> exhibit relatively poor performance in all three subjects.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -1002,11 +1002,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>The results show that there is no single school with outliers in the same subjects, proving that the outliers originate from different schools.</p>
-<div class="insight">
-<p>Insight:</p>
+<div class="insightbox">
+<p>Insights:</p>
 <ul>
 <li><p>The overall level of schools in Singapore tends to be balanced, with no significant differences and no “extreme schools” appearing in the high or low outliers for each subject.</p></li>
 <li><p>However, there is still some differentiation in subject performance levels among schools, as some schools, despite not appearing in the outliers, exhibit overall higher or lower levels in certain subjects.</p></li>
+<li><p>Additionally, the number of schools excelling in subject performance is greater than those performing below the average level.</p></li>
 <li><p>Most schools fall within a reasonable range of performance, with both strengths and weaknesses coexisting.</p></li>
 </ul>
 </div>
@@ -1077,6 +1078,12 @@ Coefficients:
 <p>There is a significant <code>positive correlation</code> between ESCS and students’ overall average scores and science scores, indicating that a higher economic, social, and cultural status is associated with better academic performance. Students who perform poorly due to unfavorable socioeconomic conditions may require some socioeconomic assistance.</p>
 </div>
 </div>
+</div>
+<div class="insightbox">
+<p>Insights: - Due to the positive correlation observed among the subjects, the scatter plot and correlation analysis indicate that there is a certain relationship between academic performance and socioeconomic status. Students from lower socioeconomic backgrounds tend to have poorer academic performance, while those from better socioeconomic circumstances tend to perform better academically.</p>
+<ul>
+<li>Based on these findings, recommendations can be made to Singaporean government departments and educational institutions. It is suggested to provide support and assistance to students from lower socioeconomic backgrounds to explore the possibility of improving overall academic performance. It is also possible that students from higher socioeconomic backgrounds have the opportunity to attend schools with stronger teaching capabilities.</li>
+</ul>
 </div>
 </section>
 </section>

@@ -390,7 +390,7 @@ number_of_schools
 
 There are a total of 164 schools.
 
-```{r}
+```{r fig.width=10, fig.height=6}
 long_data <- stu_qqq_SG_01 %>%
   gather(key = "Subject", value = "Score", MeanMATH, MeanREAD, MeanSCIE, MeanOverall) %>%
   group_by(CNTSCHID, Subject) %>%
@@ -409,7 +409,7 @@ ggplot(long_data, aes(x = CNTSCHID, y = AverageScore, color = Subject)) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
 ```
 
-From the graph, it is evident that the performance levels of most schools in Singapore are concentrated between `450 and 650`, with only a few falling outside this range. I have marked the school IDs that fall outside this range. It can be seen that the school with an ID ending in `01` shows excellent performance in all three subjects, while schools with IDs ending in `115` and `149` exhibit relatively poor performance in all three subjects.
+From the graph, it is evident that the performance levels of most schools in Singapore are concentrated between `450 and 650`, with only a few falling outside this range. I have marked the school IDs that fall outside this range. It can be seen that the school with IDs ending in `01`、`40`、`82`、`101`、`199`、`155`shows excellent performance in all three subjects, while schools with IDs ending in `115` and `149` exhibit relatively poor performance in all three subjects.
 
 ```{r fig.width=8, fig.height=10}
 school_performance <- stu_qqq_SG_01 %>%
@@ -463,14 +463,18 @@ overlapping_schools
 
 The results show that there is no single school with outliers in the same subjects, proving that the outliers originate from different schools.
 
-::: insight
-Insight:
+::: insightbox
+
+Insights:
 
 -   The overall level of schools in Singapore tends to be balanced, with no significant differences and no "extreme schools" appearing in the high or low outliers for each subject.
 
 -   However, there is still some differentiation in subject performance levels among schools, as some schools, despite not appearing in the outliers, exhibit overall higher or lower levels in certain subjects.
 
+-   Additionally, the number of schools excelling in subject performance is greater than those performing below the average level.
+
 -   Most schools fall within a reasonable range of performance, with both strengths and weaknesses coexisting.
+
 :::
 
 ## 4.4 The relationship between socioeconomic status and academic performance
@@ -510,6 +514,14 @@ lm_science
 ```
 
 There is a significant `positive correlation` between ESCS and students' overall average scores and science scores, indicating that a higher economic, social, and cultural status is associated with better academic performance. Students who perform poorly due to unfavorable socioeconomic conditions may require some socioeconomic assistance.
+:::
+
+::: insightbox
+
+Insights:
+-   Due to the positive correlation observed among the subjects, the scatter plot and correlation analysis indicate that there is a certain relationship between academic performance and socioeconomic status. Students from lower socioeconomic backgrounds tend to have poorer academic performance, while those from better socioeconomic circumstances tend to perform better academically.
+
+-   Based on these findings, recommendations can be made to Singaporean government departments and educational institutions. It is suggested to provide support and assistance to students from lower socioeconomic backgrounds to explore the possibility of improving overall academic performance. It is also possible that students from higher socioeconomic backgrounds have the opportunity to attend schools with stronger teaching capabilities.
 :::
 
 # 5 Conclusion
