@@ -19,7 +19,7 @@ While Singapore has made strides in reducing disparities in family wealth, its e
 
 # 2 Project Objectives
 
-The aim of this project is to conduct an Exploratory Data Analysis (EDA) using the 2022 PISA data, focusing on students in Singapore. The analysis will explore the distribution of Singaporean students' performance in mathematics, reading, and science, and examine the relationship between these performances and various factors such as school type, gender, and socioeconomic status. The analysis will be visualized effectively to communicate the findings derived from the data.
+The aim of this project is to conduct an Exploratory Data Analysis (EDA) using the 2022 PISA data, focusing on students in Singapore. The analysis will explore `the distribution of Singaporean students' performance in mathematics, reading, and science, and examine the relationship between these performances and various factors such as school, gender, and socioeconomic status`. The analysis will be visualized effectively to communicate the findings derived from the data.
 
 # 3 Data Preparation
 
@@ -177,7 +177,9 @@ sum(is.na(stu_qqq_SG_01))
 From the output, there are `47` missing values across all columns in **stu_qqq_SG_01**.
 :::
 
-Where is the missing value ??!! We found 47 missing values in the ESCS column.
+`Where is the missing value ??!!`
+
+We found `47 missing values` in the ESCS column.
 
 ::: panel-tabset
 ## **The code**
@@ -215,11 +217,11 @@ print(missing_values_df)
 ```
 :::
 
-The Economic, Social, and Cultural Status Index (ESCS) is a **crucial indicator**, and removing observations with missing ESCS values directly may result in sample bias. I choose to retain the missing values.
+The Economic, Social, and Cultural Status Index (ESCS) is a **crucial indicator**, and removing observations with missing ESCS values directly may result in sample bias. `I choose to retain the missing values.`
 
 ### 3.2.3 Processing PV Values
 
-Due to the presence of 10 plausible values (PVs) for performance in mathematics, reading, and science, I will take the average PV for each subject to facilitate subsequent EDA visualization.
+Due to the presence of 10 plausible values (PVs) for performance in mathematics, reading, and science, I will take the `average PV` for each subject to facilitate subsequent EDA visualization.
 
 ::: panel-tabset
 ## **The result**
@@ -302,17 +304,21 @@ p1 <- ggplot(stu_melted, aes(x = variable, y = value, fill = variable)) +
        x = "Subject",
        y = "Performance value") +
   theme_minimal() +
-  theme(legend.position = "none")
+  theme(legend.position = "top")
 
 p2 <- ggplot(stu_qqq_SG_01, aes(x = MeanOverall)) +
-  geom_point(aes(y = MeanMATH), color = 'salmon',alpha = 0.5) +
-  geom_smooth(aes(y = MeanMATH), method = 'lm', color = 'salmon') +
-  geom_point(aes(y = MeanREAD), color = 'steelblue1',alpha = 0.5) +
-  geom_smooth(aes(y = MeanREAD), method = 'lm', color = 'steelblue1') +
-  geom_point(aes(y = MeanSCIE), color = 'darkseagreen',alpha = 0.5) +
-  geom_smooth(aes(y = MeanSCIE), method = 'lm', color = 'darkseagreen') +
+  geom_point(aes(y = MeanMATH, color = "Math"), alpha = 0.5) +
+  geom_smooth(aes(y = MeanMATH, color = "Math"), method = 'lm') +
+  geom_point(aes(y = MeanREAD, color = "Reading"), alpha = 0.5) +
+  geom_smooth(aes(y = MeanREAD, color = "Reading"), method = 'lm') +
+  geom_point(aes(y = MeanSCIE, color = "Science"), alpha = 0.5) +
+  geom_smooth(aes(y = MeanSCIE, color = "Science"), method = 'lm') +
+  scale_color_manual(values = c("Math" = "salmon", "Reading" = "steelblue1", "Science" = "darkseagreen"),
+                     name = "Subject", 
+                     labels = c("Math" = "Math", "Reading" = "Reading", "Science" = "Science")) +
   theme_minimal() +
-  labs(title = "Relationship Between MeanOverall and three subjects",
+  theme(legend.position = "top") +
+  labs(title = "Relationship Between MeanOverall and Three Subjects",
        x = "MeanOverall", y = "Score")
 
 p1+p2
@@ -386,24 +392,26 @@ There are a total of 164 schools.
 
 ```{r}
 long_data <- stu_qqq_SG_01 %>%
-  gather(key = "Subject", value = "Score", MeanMATH, MeanREAD, MeanSCIE,MeanOverall) %>%
+  gather(key = "Subject", value = "Score", MeanMATH, MeanREAD, MeanSCIE, MeanOverall) %>%
   group_by(CNTSCHID, Subject) %>%
   summarise(AverageScore = mean(Score, na.rm = TRUE)) %>%
-  ungroup()
+  ungroup() %>%
+  mutate(Label = ifelse(AverageScore > 650 | AverageScore < 450, as.character(CNTSCHID), ""))
 
 # Create a dot plot to compare the average performance of different schools
 ggplot(long_data, aes(x = CNTSCHID, y = AverageScore, color = Subject)) +
   geom_point(position = position_dodge(width = 0.5)) +
+  geom_text(aes(label = Label), check_overlap = TRUE, vjust = -1, position = position_dodge(width = 0.5)) +
   theme_minimal() +
   labs(title = "Comparison of School Performance in Subjects",
        x = "School ID", y = "Average Score") +
   scale_color_brewer(palette = "Set1") +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
 ```
+From the graph, it is evident that the performance levels of most schools in Singapore are concentrated between `450 and 650`, with only a few falling outside this range. I have marked the school IDs that fall outside this range. It can be seen that the school with an ID ending in `01` shows excellent performance in all three subjects, while schools with IDs ending in `115` and `149` exhibit relatively poor performance in all three subjects.
 
-After categorizing by school, the scores in different subjects and the overall average scores of schools are dispersed. There is no clear case where any school performs well in every subject or performs poorly in every subject. The circles of four different colors indicate that there is no concentration at high or low scores.
 
-```{r fig.width=8, fig.height=9}
+```{r fig.width=8, fig.height=10}
 school_performance <- stu_qqq_SG_01 %>%
   group_by(CNTSCHID) %>%
   summarise(
@@ -417,13 +425,14 @@ school_performance <- stu_qqq_SG_01 %>%
 # Use box plots to visualize the average scores of different schools
 ggplot(school_performance, aes(x = CNTSCHID, y = AverageScore, fill = Subject)) +
   geom_boxplot() +
-  facet_wrap(~ Subject, scales = "free") +
+  facet_wrap(~ Subject, scales = "fixed") +
   theme_minimal() +
   labs(x = "School ID", y = "Average Score", title = "School Influence on Academic Performance") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) 
 ```
 
-There are some outliers, but not many, and the performance of students from most schools is relatively stable, ranging between 500-600. Regarding these outliers, I am interested in knowing if the outliers in each subject all come from the same schools.
+From the box plots, it is observable that the average academic performance of most schools in Singapore lies between `500 and 600`. The majority of schools perform better in Mathematics and Science, with slightly lower performance in Reading, yet still within a reasonable range. The mean values also fall within a sensible range, with very few outliers.
+
 
 ```{r}
 # Calculate the quartiles and outlier thresholds for each course in every school
@@ -458,7 +467,11 @@ The results show that there is no single school with outliers in the same subjec
 ::: insight
 Insight:
 
-The performance of students across subjects in Singapore schools is relatively even, with no apparent "extreme schools." Outliers come from various schools, each with its strengths and weaknesses, falling within a normal and reasonable range of consideration.
+-   The overall level of schools in Singapore tends to be balanced, with no significant differences and no "extreme schools" appearing in the high or low outliers for each subject. 
+
+-   However, there is still some differentiation in subject performance levels among schools, as some schools, despite not appearing in the outliers, exhibit overall higher or lower levels in certain subjects. 
+
+-   Most schools fall within a reasonable range of performance, with both strengths and weaknesses coexisting.
 :::
 
 ## 4.4 The relationship between socioeconomic status and academic performance
@@ -470,10 +483,13 @@ Since the three subjects and the overall average scores show a positive correlat
 
 ```{r}
 ggplot(stu_qqq_SG_01, aes(x = ESCS)) +
-  geom_point(aes(y = MeanOverall), color = 'lightseagreen',alpha = 0.5) +
-  geom_smooth(aes(y = MeanOverall), method = 'lm', color = 'lightseagreen') +
-  geom_point(aes(y = MeanSCIE), color = 'palevioletred1',alpha = 0.5) +
-  geom_smooth(aes(y = MeanSCIE), method = 'lm', color = 'palevioletred1') +
+  geom_point(aes(y = MeanOverall, color = "Overall"), alpha = 0.5) +
+  geom_smooth(aes(y = MeanOverall, color = "Overall"), method = 'lm') +
+  geom_point(aes(y = MeanSCIE, color = "Science"), alpha = 0.5) +
+  geom_smooth(aes(y = MeanSCIE, color = "Science"), method = 'lm') +
+  scale_color_manual(values = c("Overall" = "lightseagreen", "Science" = "palevioletred1"),
+                     name = "Subject", 
+                     labels = c("Overall" = "Mean Overall", "Science" = "Mean Science")) +
   theme_minimal() +
   labs(title = "Relationship Between ESCS and Academic Performance",
        x = "ESCS Index", y = "Score")
@@ -494,7 +510,8 @@ lm_overall
 lm_science
 ```
 
-There is a significant positive correlation between ESCS and students' overall average scores and science scores, indicating that a higher economic, social, and cultural status is associated with better academic performance. Students who perform poorly due to unfavorable socioeconomic conditions may require some socioeconomic assistance.
+There is a significant `positive correlation` between ESCS and students' overall average scores and science scores, indicating that a higher economic, social, and cultural status is associated with better academic performance. Students who perform poorly due to unfavorable socioeconomic conditions may require some socioeconomic assistance.
+
 :::
 
 # 5 Conclusion
