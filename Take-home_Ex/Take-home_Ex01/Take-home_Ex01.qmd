@@ -408,8 +408,8 @@ ggplot(long_data, aes(x = CNTSCHID, y = AverageScore, color = Subject)) +
   scale_color_brewer(palette = "Set1") +
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) 
 ```
-From the graph, it is evident that the performance levels of most schools in Singapore are concentrated between `450 and 650`, with only a few falling outside this range. I have marked the school IDs that fall outside this range. It can be seen that the school with an ID ending in `01` shows excellent performance in all three subjects, while schools with IDs ending in `115` and `149` exhibit relatively poor performance in all three subjects.
 
+From the graph, it is evident that the performance levels of most schools in Singapore are concentrated between `450 and 650`, with only a few falling outside this range. I have marked the school IDs that fall outside this range. It can be seen that the school with an ID ending in `01` shows excellent performance in all three subjects, while schools with IDs ending in `115` and `149` exhibit relatively poor performance in all three subjects.
 
 ```{r fig.width=8, fig.height=10}
 school_performance <- stu_qqq_SG_01 %>%
@@ -432,7 +432,6 @@ ggplot(school_performance, aes(x = CNTSCHID, y = AverageScore, fill = Subject)) 
 ```
 
 From the box plots, it is observable that the average academic performance of most schools in Singapore lies between `500 and 600`. The majority of schools perform better in Mathematics and Science, with slightly lower performance in Reading, yet still within a reasonable range. The mean values also fall within a sensible range, with very few outliers.
-
 
 ```{r}
 # Calculate the quartiles and outlier thresholds for each course in every school
@@ -467,9 +466,9 @@ The results show that there is no single school with outliers in the same subjec
 ::: insight
 Insight:
 
--   The overall level of schools in Singapore tends to be balanced, with no significant differences and no "extreme schools" appearing in the high or low outliers for each subject. 
+-   The overall level of schools in Singapore tends to be balanced, with no significant differences and no "extreme schools" appearing in the high or low outliers for each subject.
 
--   However, there is still some differentiation in subject performance levels among schools, as some schools, despite not appearing in the outliers, exhibit overall higher or lower levels in certain subjects. 
+-   However, there is still some differentiation in subject performance levels among schools, as some schools, despite not appearing in the outliers, exhibit overall higher or lower levels in certain subjects.
 
 -   Most schools fall within a reasonable range of performance, with both strengths and weaknesses coexisting.
 :::
@@ -511,17 +510,24 @@ lm_science
 ```
 
 There is a significant `positive correlation` between ESCS and students' overall average scores and science scores, indicating that a higher economic, social, and cultural status is associated with better academic performance. Students who perform poorly due to unfavorable socioeconomic conditions may require some socioeconomic assistance.
-
 :::
 
 # 5 Conclusion
 
--   Is there a correlation in the distribution of Singaporean students' academic performance across subjects? Singaporean students' academic scores show a high correlation with overall performance. Schools that excel in one subject typically also excel in other subjects and overall. However, in my analysis, I did not conduct further tests. The correlation is evident from the visualization, and further validation can be done if necessary.
+-   **Is there a correlation in the distribution of Singaporean students' academic performance across subjects?**
 
--   Is there a relationship between academic performance and gender? Indeed, there are differences in performance across subjects between male and female students. For example, boys perform better in Mathematics and Science, while girls excel in Reading. However, on average, girls show more stable overall performance. But overall, the performance between boys and girls tends to be balanced.
+    Singaporean students' academic scores show a high correlation with overall performance. Schools that excel in one subject typically also excel in other subjects and overall. However, in my analysis, I did not conduct further tests. The correlation is evident from the visualization, and further validation can be done if necessary.
 
--   Is there a difference in performance between different schools? There are some differences in the performance levels of different schools, but it's not extreme. Each school has students who perform at high levels and those who perform less well, but there's no absolute good or bad.
+-   **Is there a relationship between academic performance and gender?**
 
--   Is there a relationship between academic performance and socioeconomic status (ESCS)? Yes, there is a significant positive correlation, indicating that students with a higher socioeconomic status perform better in Mathematics, Reading, and Science. Regression analysis shows that ESCS is an important variable in predicting academic performance, significantly impacting overall student achievement. Therefore, consideration can be given to assisting students from lower socioeconomic backgrounds.
+    Indeed, there are differences in performance across subjects between male and female students. For example, boys perform better in Mathematics and Science, while girls excel in Reading. However, on average, girls show more stable overall performance. But overall, the performance between boys and girls tends to be balanced.
+
+-   **Is there a difference in performance between different schools?**
+
+    There are some differences in the performance levels of different schools, but it's not extreme. Each school has students who perform at high levels and those who perform less well, but there's no absolute good or bad.
+
+-   **Is there a relationship between academic performance and socioeconomic status (ESCS)?**
+
+    Yes, there is a significant positive correlation, indicating that students with a higher socioeconomic status perform better in Mathematics, Reading, and Science. Regression analysis shows that ESCS is an important variable in predicting academic performance, significantly impacting overall student achievement. Therefore, consideration can be given to assisting students from lower socioeconomic backgrounds.
 
 Here, I have chosen a few perspectives for analysis. Further detailed analyses, such as cluster analysis, could reveal more intrinsic phenomena.
