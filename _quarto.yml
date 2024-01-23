@@ -3,7 +3,11 @@ project:
 
 website:
   title: "SuzyZsj"
+  favicon: "Images/paw.png"
+  
   navbar:
+    logo: "Images/bichon.png"
+    search: true
     left:
     - text: "Hands-on Exercise"
       menu: 
@@ -20,6 +24,9 @@ website:
         - text: "Take-home Exercise 1"
           href: "Take-home_Ex/Take-home_Ex01/Take-home_Ex01.html"
     right: 
+      - icon: linkedin
+        href: https://www.linkedin.com/in/shujie-zhang-202438267/
+        aria-label: Linkedin
       - href: index.qmd
         text: Home
       - about.qmd
