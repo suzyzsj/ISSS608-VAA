@@ -28,6 +28,8 @@ exam_data <- read_csv("data/Exam_data.csv")
 
 ggplot2 is an R package for declaratively creating data-driven graphics based on The Grammar of Graphics.
 
+![](/images/ggplot.png){width="750"}
+
 ## R Graphics VS ggplot
 
 ::: panel-tabset
@@ -175,9 +177,9 @@ ggplot(data=exam_data,
     ) +
     theme(plot.background=element_rect(fill="#f5f5f5",colour="#f5f5f5"))      
 ```
+
 ::: panel-tabset
 ### Changed no. of bins
-
 
 ```{r}
 # Original
@@ -287,7 +289,6 @@ bb_p2 <- ggplot(data=exam_data,
 # format plot layout
 bb_p1 + bb_p2
 ```
-
 :::
 
 ## Modifying a geometric object by changing aes()
