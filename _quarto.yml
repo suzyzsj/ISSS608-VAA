@@ -27,9 +27,9 @@ website:
       - icon: linkedin
         href: https://www.linkedin.com/in/shujie-zhang-202438267/
         aria-label: Linkedin
-      - href: index.qmd
-        text: Home
-      - about.qmd
+      - href: about.qmd
+        text: About
+
       
 format:
   html:

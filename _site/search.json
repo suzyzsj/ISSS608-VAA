@@ -21,13 +21,6 @@
     "text": "Importing PISA data\nThe code chunk below uses ‘read_sas()’ of haven to import PISA data into R environment.\n\nstu_qqq &lt;- read_sas(\"data/cy08msp_stu_qqq.sas7bdat\")\n\n\nstu_qqq_SG &lt;- stu_qqq %&gt;%\n  filter(CNT == \"SGP\")\n\n\nwrite_rds(stu_qqq_SG,\n          \"data/stu_qqq_SG.rds\")\n\n\nstu_qqq_SG &lt;- read_rds(\"data/stu_qqq_SG.rds\")"
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
-  },
-  {
     "objectID": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html",
     "href": "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html",
     "title": "Hands-on Exercise 1",
@@ -299,5 +292,12 @@
     "title": "Take-home Exercise 1",
     "section": "4.4 The relationship between socioeconomic status and academic performance",
     "text": "4.4 The relationship between socioeconomic status and academic performance\nSince the three subjects and the overall average scores show a positive correlation, I have chosen to analyze the relationship between socioeconomic status and academic performance using MeanOverall and MeanSCIE.\n\nScatter plotCorrelation test\n\n\n\n\nCode\nggplot(stu_qqq_SG_01, aes(x = ESCS)) +\n  geom_point(aes(y = MeanOverall, color = \"Overall\"), alpha = 0.5) +\n  geom_smooth(aes(y = MeanOverall, color = \"Overall\"), method = 'lm') +\n  geom_point(aes(y = MeanSCIE, color = \"Science\"), alpha = 0.5) +\n  geom_smooth(aes(y = MeanSCIE, color = \"Science\"), method = 'lm') +\n  scale_color_manual(values = c(\"Overall\" = \"lightseagreen\", \"Science\" = \"palevioletred1\"),\n                     name = \"Subject\", \n                     labels = c(\"Overall\" = \"Mean Overall\", \"Science\" = \"Mean Science\")) +\n  theme_minimal() +\n  labs(title = \"Relationship Between ESCS and Academic Performance\",\n       x = \"ESCS Index\", y = \"Score\")\n\n\n\n\n\n\n\nTo determine if there is an association between the two groups, conduct a correlation analysis test.\n\n\nCode\ncor_overall_escs &lt;- cor(stu_qqq_SG_01$MeanOverall, stu_qqq_SG_01$ESCS, use = \"complete.obs\")\ncor_science_escs &lt;- cor(stu_qqq_SG_01$MeanSCIE, stu_qqq_SG_01$ESCS, use = \"complete.obs\")\n\nlm_overall &lt;- lm(MeanOverall ~ ESCS, data = stu_qqq_SG_01)\nlm_science &lt;- lm(MeanSCIE ~ ESCS, data = stu_qqq_SG_01)\n\nlm_overall\n\n\n\nCall:\nlm(formula = MeanOverall ~ ESCS, data = stu_qqq_SG_01)\n\nCoefficients:\n(Intercept)         ESCS  \n     544.90        51.28  \n\n\nCode\nlm_science\n\n\n\nCall:\nlm(formula = MeanSCIE ~ ESCS, data = stu_qqq_SG_01)\n\nCoefficients:\n(Intercept)         ESCS  \n     547.01        50.03  \n\n\nThere is a significant positive correlation between ESCS and students’ overall average scores and science scores, indicating that a higher economic, social, and cultural status is associated with better academic performance. Students who perform poorly due to unfavorable socioeconomic conditions may require some socioeconomic assistance.\n\n\n\n\nInsights: - Due to the positive correlation observed among the subjects, the scatter plot and correlation analysis indicate that there is a certain relationship between academic performance and socioeconomic status. Students from lower socioeconomic backgrounds tend to have poorer academic performance, while those from better socioeconomic circumstances tend to perform better academically.\n\nBased on these findings, recommendations can be made to Singaporean government departments and educational institutions. It is suggested to provide support and assistance to students from lower socioeconomic backgrounds to explore the possibility of improving overall academic performance. It is also possible that students from higher socioeconomic backgrounds have the opportunity to attend schools with stronger teaching capabilities."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "Learning Objectives\n\nUnderstand the basic concepts, theories and methodologies of visual analytics.\nAnalyse data using appropriate visual thinking and visual analytics techniques.\nPresent data using appropriate visual communication and graphical methods.\nDesign and implement cutting-edge visual analytics system for supporting decision making.\n\n\nDon’t worry,be happy,have a cup of coffee~\n\n\nAbout Me\nStill exploring all the possibilities of the future, but the most formidable task at the moment is learning data analysis and coding.\nAdditionally, the paw prints on this website all originate from my little dog, “Diamond.”"
   }
 ]

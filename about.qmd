@@ -2,8 +2,24 @@
 title: "About"
 ---
 
-About this site
+# **Learning Objectives**
 
-```{r}
-1 + 1
-```
+-   Understand the basic concepts, theories and methodologies of visual analytics.
+
+-   Analyse data using appropriate visual thinking and visual analytics techniques.
+
+-   Present data using appropriate visual communication and graphical methods.
+
+-   Design and implement cutting-edge visual analytics system for supporting decision making.
+
+![](images/coffee.gif){width="350"}
+
+***Don't worry,be happy,have a cup of coffee\~***
+
+# **About Me**
+
+Still exploring all the possibilities of the future, but the most formidable task at the moment is learning data analysis and coding.
+
+Additionally, the paw prints on this website all originate from my little dog, "**Diamond**."
+
+![](images/Dm.GIF){width="350"}
