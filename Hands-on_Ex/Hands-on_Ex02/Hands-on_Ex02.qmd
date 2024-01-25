@@ -1,5 +1,5 @@
 ---
-title: "Hands-on_Ex02"
+title: "Hands-on Exercise 2：Beyond ggplot2 Fundamentals"
 author: "Zhang Shujie"
 execute: 
   eval: true
