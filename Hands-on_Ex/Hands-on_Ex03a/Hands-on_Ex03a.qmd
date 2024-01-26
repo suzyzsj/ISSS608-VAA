@@ -1,6 +1,6 @@
 ---
 title: "Hands-on Exercise 3a：Programming Interactive Data Visualisation with R"
-author: "Zhang Shujie"
+author: "Zhang Shujie (Suzy)"
 execute: 
   eval: true
   echo: true
@@ -646,8 +646,6 @@ This [link](https://davidgohel.github.io/ggiraph/) provides online version of th
 -   [Plotly R Library Fundamentals](https://plotly.com/r/plotly-fundamentals/) is a good place to learn the fundamental features of Plotly’s R API.
 
 -   [Getting Started](https://gganimate.com/articles/gganimate.html)
-
--   Visit this [link](https://rpubs.com/raymondteo/dataviz8) for a very interesting implementation of gganimate by your senior.
 
 -   [Building an animation step-by-step with gganimate](https://www.alexcookson.com/post/2020-10-18-building-an-animation-step-by-step-with-gganimate/).
 

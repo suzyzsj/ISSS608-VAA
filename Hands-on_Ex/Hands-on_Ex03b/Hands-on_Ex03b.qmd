@@ -1,6 +1,6 @@
 ---
 title: "Hands-on Exercise 3b：Programming Animated Statistical Graphics with R"
-author: "Zhang Shujie"
+author: "Zhang Shujie (Suzy)"
 execute: 
   eval: true
   echo: true

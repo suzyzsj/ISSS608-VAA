@@ -1,7 +1,8 @@
 ---
 title: "Take-home Exercise 1"
-author: "Suzy"
+author: "Zhang Shujie (Suzy)"
 date: "January 16,2024"
+date-modified: "last-modified"
 execute: 
   eval: true
   echo: true
@@ -198,7 +199,6 @@ missing_values_df <- data.frame(
 
 # View the location of the missing value
 print(missing_values_df)
-
 ```
 
 ## **The result**
@@ -464,7 +464,6 @@ overlapping_schools
 The results show that there is no single school with outliers in the same subjects, proving that the outliers originate from different schools.
 
 ::: insightbox
-
 Insights:
 
 -   The overall level of schools in Singapore tends to be balanced, with no significant differences and no "extreme schools" appearing in the high or low outliers for each subject.
@@ -474,7 +473,6 @@ Insights:
 -   Additionally, the number of schools excelling in subject performance is greater than those performing below the average level.
 
 -   Most schools fall within a reasonable range of performance, with both strengths and weaknesses coexisting.
-
 :::
 
 ## 4.4 The relationship between socioeconomic status and academic performance
@@ -517,9 +515,7 @@ There is a significant `positive correlation` between ESCS and students' overall
 :::
 
 ::: insightbox
-
-Insights:
--   Due to the positive correlation observed among the subjects, the scatter plot and correlation analysis indicate that there is a certain relationship between academic performance and socioeconomic status. Students from lower socioeconomic backgrounds tend to have poorer academic performance, while those from better socioeconomic circumstances tend to perform better academically.
+Insights: - Due to the positive correlation observed among the subjects, the scatter plot and correlation analysis indicate that there is a certain relationship between academic performance and socioeconomic status. Students from lower socioeconomic backgrounds tend to have poorer academic performance, while those from better socioeconomic circumstances tend to perform better academically.
 
 -   Based on these findings, recommendations can be made to Singaporean government departments and educational institutions. It is suggested to provide support and assistance to students from lower socioeconomic backgrounds to explore the possibility of improving overall academic performance. It is also possible that students from higher socioeconomic backgrounds have the opportunity to attend schools with stronger teaching capabilities.
 :::

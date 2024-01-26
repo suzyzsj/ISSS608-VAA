@@ -1,6 +1,6 @@
 ---
 title: "Hands-on Exercise 2：Beyond ggplot2 Fundamentals"
-author: "Zhang Shujie"
+author: "Zhang Shujie (Suzy)"
 execute: 
   eval: true
   echo: true
@@ -304,10 +304,9 @@ p1 + p2
 ```
 :::
 
-
 ### 2.3: Combining three ggplot2 graphs
 
--   “|” operator to stack two ggplot2 graphs,
+-   “\|” operator to stack two ggplot2 graphs,
 -   “/” operator to place the plots beside each other,
 -   “()” operator the define the sequence of the plotting.
 
@@ -328,6 +327,7 @@ p1 + p2
 :::
 
 ### 2.4: Creating a composite figure with tag
+
 patchwork also provides auto-tagging capabilities.
 
 ::: panel-tabset

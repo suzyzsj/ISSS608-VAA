@@ -1,6 +1,6 @@
 ---
 title: "Hands-on Exercise 1：Introduction to Visual Analytics"
-author: "Zhang Shujie"
+author: "Zhang Shujie (Suzy)"
 execute: 
   eval: true
   echo: true
