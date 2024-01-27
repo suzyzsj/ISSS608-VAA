@@ -236,13 +236,17 @@ ggplot(data=stu_qqq_eda,
 
 ### **Critique**
 
--   **Lack of intuitive display of data dispersion**: Histograms can show the pattern of data distribution, but they do not display the spread of data as intuitively as box plots, including quartiles and outliers.
+**Clarity：**
+
+-   **Difficulty in comparing multiple distributions**: If there is a need to compare the distributions of two or more different datasets, a single histogram might not be as clear as a combined chart.
 
 -   **Indistinct median and outliers**: Histograms do not highlight the median and outliers as clearly as box plots. Box plots provide a way to quickly identify median, outliers, and other important statistical information.
 
 -   **Unclear data range**: Histograms may not always clearly show the maximum and minimum values of data, whereas box plots explicitly mark these values.
 
--   **Difficulty in comparing multiple distributions**: If there is a need to compare the distributions of two or more different datasets, a single histogram might not be as clear as a combined chart.
+    **Aesthetics：**
+
+-   **Lack of intuitive display of data dispersion**: Histograms can show the pattern of data distribution, but they do not display the spread of data as intuitively as box plots, including quartiles and outliers.
 
 -   **Lack of space efficiency**: A single chart may visually occupy more space because it requires additional charts to provide the information that a box plot can offer.
 
@@ -518,11 +522,15 @@ sch_math + sch_read + sch_sci
 
 ### **Critique**
 
+**Clarity:**
+
 -   **Lack of integrated comparison**, making it difficult to perform quick and direct comparisons between subjects.
 
 -   **Insufficient integration of information**, with independent charts leading to dispersed information, requiring the audience to shift their attention between different charts to gain a comprehensive understanding.
 
 -   **Unclear identification**: The box plots do not provide specific identifiers (such as School ID) like the scatter plot, which makes it less convenient to identify specific data points (such as particularly high or low school average scores).
+
+    **Aesthetics：**
 
 -   **Visual effects**: The scatter plot provides visual distinction through color coding, which helps to quickly identify the distribution of different subjects.
 
@@ -639,11 +647,15 @@ gender_math + gender_read + gender_sci
 
 ### **Critique**
 
+**Clarity：**
+
 -   **Data Overlap Issue:** Here, using boxplots, individual points may overlap, making it difficult to distinguish between data points. Moreover, it does not clearly differentiate between the comparisons of males and females.
 
 -   **Lack of Data Density Information:** Boxplots do not show the density of the data, that is, the concentration of data in different regions.
 
--   **Aesthetics:** The presentation is not visually appealing and does not provide an intuitive sense of comparison. In this case, switching to density plots would be better.
+    **Aesthetics:**
+
+-   The presentation is not visually appealing and does not provide an intuitive sense of comparison. In this case, switching to density plots would be better.
 
 ### **Remake**
 
@@ -753,9 +765,13 @@ p1/p2/p3
 
 ### **Critique**
 
--   **Clarity：**I think both charts are quite clear, but for the first one, "Distribution of Socioeconomic Status," I believe it could be further improved by adding annotations for the mean and median, which would likely enhance its clarity.
+**Clarity：**
 
--   **Aesthetics:** for the second chart, I suggest representing the three subjects with different colors to increase color diversity and to better differentiate between the subjects, as the current design might cause some confusion.
+-   I think both charts are quite clear, but for the first one, "Distribution of Socioeconomic Status," I believe it could be further improved by adding annotations for the mean and median, which would likely enhance its clarity.
+
+    **Aesthetics:**
+
+-   For the second chart, I suggest representing the three subjects with different colors to increase color diversity and to better differentiate between the subjects, as the current design might cause some confusion.
 
 ### **Remake**
 
@@ -806,9 +822,11 @@ grid.arrange(p1, p2, p3, nrow = 3)
 ::: insightbox
 ### 🔍**Improvement**
 
--   In the first chart, detailed annotations have been added, including the calculation of specific mean and median values. mean_value \<- mean(stu_qqq_socio$Socioeconomic_Stat, na.rm = TRUE) median_value <- median(stu_qqq_socio$Socioeconomic_Stat, na.rm = TRUE)
+-   In the first chart, detailed annotations have been added, including the calculation of specific mean and median values.
 
--   In the second chart, three different colors were used to distinguish the three subjects, making it visually more appealing and clear. color_math \<- "#89A0B0"\
+-   In the second chart, three different colors were used to distinguish the three subjects, making it visually more appealing and clear.
+
+    color_math \<- "#89A0B0"\
     color_reading \<- "#A0B089"\
     color_science \<- "#B089A0"
 :::
