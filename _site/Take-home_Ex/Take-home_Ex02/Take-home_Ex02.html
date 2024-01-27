@@ -208,6 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#visualization-1academic-performance" id="toc-visualization-1academic-performance" class="nav-link" data-scroll-target="#visualization-1academic-performance"><strong>Visualization 1:Academic Performance</strong></a>
   <ul class="collapse">
   <li><a href="#critique" id="toc-critique" class="nav-link" data-scroll-target="#critique"><strong>Critique</strong></a></li>
+  <li><a href="#remake" id="toc-remake" class="nav-link" data-scroll-target="#remake"><strong>Remake</strong></a></li>
   <li><a href="#improvement" id="toc-improvement" class="nav-link" data-scroll-target="#improvement"><strong>🔍Improvement</strong></a></li>
   </ul></li>
   <li><a href="#visualization-2student-performances-variations-within-schools" id="toc-visualization-2student-performances-variations-within-schools" class="nav-link" data-scroll-target="#visualization-2student-performances-variations-within-schools"><strong>Visualization 2:Student Performances Variations Within Schools</strong></a>
@@ -532,13 +533,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="critique" class="level3">
 <h3 class="anchored" data-anchor-id="critique"><strong>Critique</strong></h3>
 <ul>
+<li><strong>Clarity：</strong>
+<ul>
+<li><strong>Difficulty in comparing multiple distributions</strong>: If there is a need to compare the distributions of two or more different datasets, a single histogram might not be as clear as a combined chart.</li>
+<li><strong>Indistinct median and outliers</strong>: Histograms do not highlight the median and outliers as clearly as box plots. Box plots provide a way to quickly identify median, outliers, and other important statistical information.</li>
+<li><strong>Unclear data range</strong>: Histograms may not always clearly show the maximum and minimum values of data, whereas box plots explicitly mark these values.</li>
+</ul></li>
+<li><strong>Aesthetics：</strong>
+<ul>
 <li><p><strong>Lack of intuitive display of data dispersion</strong>: Histograms can show the pattern of data distribution, but they do not display the spread of data as intuitively as box plots, including quartiles and outliers.</p></li>
-<li><p><strong>Indistinct median and outliers</strong>: Histograms do not highlight the median and outliers as clearly as box plots. Box plots provide a way to quickly identify median, outliers, and other important statistical information.</p></li>
-<li><p><strong>Unclear data range</strong>: Histograms may not always clearly show the maximum and minimum values of data, whereas box plots explicitly mark these values.</p></li>
-<li><p><strong>Difficulty in comparing multiple distributions</strong>: If there is a need to compare the distributions of two or more different datasets, a single histogram might not be as clear as a combined chart.</p></li>
-<li><p><strong>Lack of space efficiency</strong>: A single chart may visually occupy more space because it requires additional charts to provide the information that a box plot can offer.</p>
-<h3 id="remake" class="anchored"><strong>Remake</strong></h3></li>
+<li><p><strong>Lack of space efficiency</strong>: A single chart may visually occupy more space because it requires additional charts to provide the information that a box plot can offer.</p></li>
+</ul></li>
 </ul>
+</section>
+<section id="remake" class="level3">
+<h3 class="anchored" data-anchor-id="remake"><strong>Remake</strong></h3>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true"><strong>Mathematics</strong></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false"><strong>Reading</strong></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-3" role="tab" aria-controls="tabset-4-3" aria-selected="false"><strong>Science</strong></a></li></ul>
 <div class="tab-content">
@@ -850,10 +859,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="critique-1" class="level3">
 <h3 class="anchored" data-anchor-id="critique-1"><strong>Critique</strong></h3>
 <ul>
+<li><p><strong>Clarity:</strong></p>
+<ul>
 <li><p><strong>Lack of integrated comparison</strong>, making it difficult to perform quick and direct comparisons between subjects.</p></li>
 <li><p><strong>Insufficient integration of information</strong>, with independent charts leading to dispersed information, requiring the audience to shift their attention between different charts to gain a comprehensive understanding.</p></li>
 <li><p><strong>Unclear identification</strong>: The box plots do not provide specific identifiers (such as School ID) like the scatter plot, which makes it less convenient to identify specific data points (such as particularly high or low school average scores).</p></li>
-<li><p><strong>Visual effects</strong>: The scatter plot provides visual distinction through color coding, which helps to quickly identify the distribution of different subjects.</p></li>
+</ul></li>
+<li><p><strong>Aesthetics：</strong></p>
+<ul>
+<li><strong>Visual effects</strong>: The scatter plot provides visual distinction through color coding, which helps to quickly identify the distribution of different subjects.</li>
+</ul></li>
 </ul>
 </section>
 <section id="remake-1" class="level3">
@@ -983,9 +998,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="critique-2" class="level3">
 <h3 class="anchored" data-anchor-id="critique-2"><strong>Critique</strong></h3>
 <ul>
+<li><p><strong>Clarity：</strong></p>
+<ul>
 <li><p><strong>Data Overlap Issue:</strong> Here, using boxplots, individual points may overlap, making it difficult to distinguish between data points. Moreover, it does not clearly differentiate between the comparisons of males and females.</p></li>
 <li><p><strong>Lack of Data Density Information:</strong> Boxplots do not show the density of the data, that is, the concentration of data in different regions.</p></li>
-<li><p><strong>Aesthetics:</strong> The presentation is not visually appealing and does not provide an intuitive sense of comparison. In this case, switching to density plots would be better.</p></li>
+</ul></li>
+<li><p><strong>Aesthetics:</strong></p>
+<ul>
+<li>The presentation is not visually appealing and does not provide an intuitive sense of comparison. In this case, switching to density plots would be better.</li>
+</ul></li>
 </ul>
 </section>
 <section id="remake-2" class="level3">
@@ -1113,8 +1134,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="critique-3" class="level3">
 <h3 class="anchored" data-anchor-id="critique-3"><strong>Critique</strong></h3>
 <ul>
-<li><p><strong>Clarity：</strong>I think both charts are quite clear, but for the first one, “Distribution of Socioeconomic Status,” I believe it could be further improved by adding annotations for the mean and median, which would likely enhance its clarity.</p></li>
-<li><p><strong>Aesthetics:</strong> for the second chart, I suggest representing the three subjects with different colors to increase color diversity and to better differentiate between the subjects, as the current design might cause some confusion.</p></li>
+<li><p><strong>Clarity：</strong></p>
+<ul>
+<li>I think both charts are quite clear, but for the first one, “Distribution of Socioeconomic Status,” I believe it could be further improved by adding annotations for the mean and median, which would likely enhance its clarity.</li>
+</ul></li>
+<li><p><strong>Aesthetics:</strong></p>
+<ul>
+<li>For the second chart, I suggest representing the three subjects with different colors to increase color diversity and to better differentiate between the subjects, as the current design might cause some confusion.</li>
+</ul></li>
 </ul>
 </section>
 <section id="remake-3" class="level3">

@@ -236,21 +236,16 @@ ggplot(data=stu_qqq_eda,
 
 ### **Critique**
 
-**Clarity：**
+-   **Clarity：**
+    -   **Difficulty in comparing multiple distributions**: If there is a need to compare the distributions of two or more different datasets, a single histogram might not be as clear as a combined chart.
+    -   **Indistinct median and outliers**: Histograms do not highlight the median and outliers as clearly as box plots. Box plots provide a way to quickly identify median, outliers, and other important statistical information.
+    -   **Unclear data range**: Histograms may not always clearly show the maximum and minimum values of data, whereas box plots explicitly mark these values.
+-   **Aesthetics：**
+    -   **Lack of intuitive display of data dispersion**: Histograms can show the pattern of data distribution, but they do not display the spread of data as intuitively as box plots, including quartiles and outliers.
 
--   **Difficulty in comparing multiple distributions**: If there is a need to compare the distributions of two or more different datasets, a single histogram might not be as clear as a combined chart.
+    -   **Lack of space efficiency**: A single chart may visually occupy more space because it requires additional charts to provide the information that a box plot can offer.
 
--   **Indistinct median and outliers**: Histograms do not highlight the median and outliers as clearly as box plots. Box plots provide a way to quickly identify median, outliers, and other important statistical information.
-
--   **Unclear data range**: Histograms may not always clearly show the maximum and minimum values of data, whereas box plots explicitly mark these values.
-
-    **Aesthetics：**
-
--   **Lack of intuitive display of data dispersion**: Histograms can show the pattern of data distribution, but they do not display the spread of data as intuitively as box plots, including quartiles and outliers.
-
--   **Lack of space efficiency**: A single chart may visually occupy more space because it requires additional charts to provide the information that a box plot can offer.
-
-    ### **Remake**
+### **Remake**
 
 ::: panel-tabset
 ## **Mathematics**
@@ -522,17 +517,17 @@ sch_math + sch_read + sch_sci
 
 ### **Critique**
 
-**Clarity:**
+-   **Clarity:**
 
--   **Lack of integrated comparison**, making it difficult to perform quick and direct comparisons between subjects.
+    -   **Lack of integrated comparison**, making it difficult to perform quick and direct comparisons between subjects.
 
--   **Insufficient integration of information**, with independent charts leading to dispersed information, requiring the audience to shift their attention between different charts to gain a comprehensive understanding.
+    -   **Insufficient integration of information**, with independent charts leading to dispersed information, requiring the audience to shift their attention between different charts to gain a comprehensive understanding.
 
--   **Unclear identification**: The box plots do not provide specific identifiers (such as School ID) like the scatter plot, which makes it less convenient to identify specific data points (such as particularly high or low school average scores).
+    -   **Unclear identification**: The box plots do not provide specific identifiers (such as School ID) like the scatter plot, which makes it less convenient to identify specific data points (such as particularly high or low school average scores).
 
-    **Aesthetics：**
+-   **Aesthetics：**
 
--   **Visual effects**: The scatter plot provides visual distinction through color coding, which helps to quickly identify the distribution of different subjects.
+    -   **Visual effects**: The scatter plot provides visual distinction through color coding, which helps to quickly identify the distribution of different subjects.
 
 ### **Remake**
 
@@ -647,15 +642,15 @@ gender_math + gender_read + gender_sci
 
 ### **Critique**
 
-**Clarity：**
+-   **Clarity：**
 
--   **Data Overlap Issue:** Here, using boxplots, individual points may overlap, making it difficult to distinguish between data points. Moreover, it does not clearly differentiate between the comparisons of males and females.
+    -   **Data Overlap Issue:** Here, using boxplots, individual points may overlap, making it difficult to distinguish between data points. Moreover, it does not clearly differentiate between the comparisons of males and females.
 
--   **Lack of Data Density Information:** Boxplots do not show the density of the data, that is, the concentration of data in different regions.
+    -   **Lack of Data Density Information:** Boxplots do not show the density of the data, that is, the concentration of data in different regions.
 
-    **Aesthetics:**
+-   **Aesthetics:**
 
--   The presentation is not visually appealing and does not provide an intuitive sense of comparison. In this case, switching to density plots would be better.
+    -   The presentation is not visually appealing and does not provide an intuitive sense of comparison. In this case, switching to density plots would be better.
 
 ### **Remake**
 
@@ -765,13 +760,13 @@ p1/p2/p3
 
 ### **Critique**
 
-**Clarity：**
+-   **Clarity：**
 
--   I think both charts are quite clear, but for the first one, "Distribution of Socioeconomic Status," I believe it could be further improved by adding annotations for the mean and median, which would likely enhance its clarity.
+    -   I think both charts are quite clear, but for the first one, "Distribution of Socioeconomic Status," I believe it could be further improved by adding annotations for the mean and median, which would likely enhance its clarity.
 
-    **Aesthetics:**
+-   **Aesthetics:**
 
--   For the second chart, I suggest representing the three subjects with different colors to increase color diversity and to better differentiate between the subjects, as the current design might cause some confusion.
+    -   For the second chart, I suggest representing the three subjects with different colors to increase color diversity and to better differentiate between the subjects, as the current design might cause some confusion.
 
 ### **Remake**
 
