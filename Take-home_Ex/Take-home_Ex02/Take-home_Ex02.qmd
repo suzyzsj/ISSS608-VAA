@@ -812,3 +812,11 @@ grid.arrange(p1, p2, p3, nrow = 3)
     color_reading \<- "#A0B089"\
     color_science \<- "#B089A0"
 :::
+
+## **Learning Points**
+
+-   The take-home exercise 1 done by my classmates are all excellent. Optimizing my peers' homework has allowed me to learn a lot. On one hand, it involves learning unfamiliar syntax, and on the other hand, it enables me to further apply **`ggplot2`**, **`ggplot2 extensions`**, and **`tidyverse packages`** flexibly.
+
+-   In terms of clarity, we need to choose just the right type of graphic that ensures the statistical charts comprehensively and clearly convey all the information of the data. Moreover, it's crucial to use efficient graphical expression to integrate and distill the key points of the information.
+
+-   As for aesthetics, the matching of colors and the thickness of lines can affect the beauty of the image, which has trained my aesthetic skills. And it allows me to understand the data more deeply through the matching of colors.
