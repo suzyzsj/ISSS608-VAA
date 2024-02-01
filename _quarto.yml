@@ -9,13 +9,13 @@ website:
     logo: "Images/bichon.png"
     search: true
     left:
-    - text: "Home"
+    - text: "{{< fa house-chimney-window >}} Home"
       menu: 
        - text: "Home"
          href: index.qmd
        - text: "About me"
          href: about.html
-    - text: "Hands-on Exercise"
+    - text: "{{< fa hand-sparkles >}} Hands-on Exercise"
       menu: 
         - text: "Hands-on Exercise 1"
           href: "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html"
@@ -33,16 +33,19 @@ website:
           href: "Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04c.html" 
         - text: "Hands-on Exercise 4d"
           href: "Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04d.html" 
-    - text: "In-class Exercise"
+    - text: "{{< fa pen-to-square >}} In-class Exercise"
       menu: 
         - text: "In-class Exercise 1"
           href: "In-class_Ex/In-class_Ex01/In-class_Ex01.html"
-    - text: "Take-home Exercise"
+    - text: "{{< fa magnifying-glass-chart >}} Take-home Exercise"
       menu: 
         - text: "Take-home Exercise 1"
           href: "Take-home_Ex/Take-home_Ex01/Take-home_Ex01.html"
         - text: "Take-home Exercise 2"
-          href: "Take-home_Ex/Take-home_Ex02/Take-home_Ex02.html"          
+          href: "Take-home_Ex/Take-home_Ex02/Take-home_Ex02.html"  
+     - text: "{{< fa laptop-code >}} Projects"
+        menu:
+        - text: "Comming soon"
     right: 
       - icon: linkedin
         href: https://www.linkedin.com/in/shujie-zhang-202438267/
