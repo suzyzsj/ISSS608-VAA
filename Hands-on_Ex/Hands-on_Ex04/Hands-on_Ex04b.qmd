@@ -59,9 +59,8 @@ Default information: - statistical details - Bayes Factor - sample sizes - distr
 
 -   When we are comparing two hypotheses, H1 (the alternate hypothesis) and H0 (the null hypothesis), the Bayes Factor is often written as B10. It can be defined mathematically as
 
-```{=html}
 <!-- -->
-```
+
 -   The [**Schwarz criterion**](https://www.statisticshowto.com/bayesian-information-criterion/) is one of the easiest ways to calculate rough approximation of the Bayes Factor.
 
 ### **10.3.5 How to interpret Bayes Factor**
@@ -141,7 +140,7 @@ ggbarstats(exam1,
            y = GENDER)
 ```
 
-##  **Visualising Models**
+## **Visualising Models**
 
 -   Toyota Corolla case study will be used. The purpose of study is to build a model to discover factors affecting prices of used-cars by taking into consideration a set of explanatory variables.
 
@@ -226,7 +225,7 @@ check_model(model1)
 
 ```
 
-###  **Visualising Regression Parameters: see methods**
+### **Visualising Regression Parameters: see methods**
 
 In the code below, plot() of see package and parameters() of parameters package is used to visualise the parameters of a regression model.
 

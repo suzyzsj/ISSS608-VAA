@@ -41,6 +41,9 @@ website:
       - icon: linkedin
         href: https://www.linkedin.com/in/shujie-zhang-202438267/
         aria-label: Linkedin
+      - icon: diagram-3-fill
+        href: https://public.tableau.com/app/profile/shujie.zhang/vizzes
+        aria-label: Tableau
       - href: about.qmd
         text: About
 
