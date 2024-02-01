@@ -9,6 +9,12 @@ website:
     logo: "Images/bichon.png"
     search: true
     left:
+    - text: "Home"
+      menu: 
+       - text: "Home"
+         href: index.qmd
+       - text: "About me"
+         href: about.html
     - text: "Hands-on Exercise"
       menu: 
         - text: "Hands-on Exercise 1"

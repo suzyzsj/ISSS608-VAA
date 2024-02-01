@@ -1,6 +1,18 @@
 ---
-title: "About"
+title: ""
 ---
+
+![](images/A+.gif){fig-align="center" width="458"}
+
+# **About Me**
+
+![](images/cv.drawio-01.png)
+
+Still exploring all the possibilities of the future, but the most formidable task at the moment is learning data analysis and coding.
+
+Additionally, the paw prints on this website all originate from my little dog, "**Diamond**."
+
+![](images/Dm.GIF){fig-align="center" width="350"}
 
 # **Learning Objectives**
 
@@ -12,14 +24,6 @@ title: "About"
 
 -   Design and implement cutting-edge visual analytics system for supporting decision making.
 
-![](images/coffee.gif){width="350"}
+![](images/coffee.gif){fig-align="center" width="350"}
 
 ***Don't worry,be happy,have a cup of coffee\~***
-
-# **About Me**
-
-Still exploring all the possibilities of the future, but the most formidable task at the moment is learning data analysis and coding.
-
-Additionally, the paw prints on this website all originate from my little dog, "**Diamond**."
-
-![](images/Dm.GIF){width="350"}
