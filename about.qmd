@@ -6,7 +6,7 @@ title: ""
 
 # **About Me**
 
-![](images/cv.drawio (1).png)
+![](images/cv.drawio%20(1).png)
 
 Still exploring all the possibilities of the future, but the most formidable task at the moment is learning data analysis and coding.
 
