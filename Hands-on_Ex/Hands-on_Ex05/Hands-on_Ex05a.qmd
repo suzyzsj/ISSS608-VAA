@@ -1,0 +1,9 @@
+---
+title: "Hands-on Exercise 5a:Creating Ternary Plot with R"
+author: "Zhang Shujie (Suzy)"
+execute: 
+  eval: true
+  echo: true
+  warning: false
+editor: visual
+---

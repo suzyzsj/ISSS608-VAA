@@ -123,7 +123,7 @@ ggplot(exam,
   geom_density_ridges_gradient(
     scale = 3,
     rel_min_height = 0.01) +
-  scale_fill_viridis_c(name = "Temp. [F]",
+  scale_fill_viridis_c(name = "Score",
                        option = "C") +
   scale_x_continuous(
     name = "English grades",
@@ -144,7 +144,7 @@ ggplot(exam,
   geom_density_ridges_gradient(
     scale = 3,
     rel_min_height = 0.01) +
-  scale_fill_viridis_c(name = "Temp. [F]",
+  scale_fill_viridis_c(name = "Score",
                        option = "C") +
   scale_x_continuous(
     name = "English grades",
