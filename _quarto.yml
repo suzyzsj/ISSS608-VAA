@@ -15,7 +15,7 @@ website:
          href: index.qmd
        - text: "About me"
          href: about.html
-    - text: "{{< fa hand-sparkles >}} Hands-on Exercise"
+    - text: "Hands-on Exercise"
       menu: 
         - text: "Hands-on Exercise 1"
           href: "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html"
@@ -32,18 +32,28 @@ website:
         - text: "Hands-on Exercise 4c"
           href: "Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04c.html" 
         - text: "Hands-on Exercise 4d"
-          href: "Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04d.html" 
-    - text: "{{< fa pen-to-square >}} In-class Exercise"
+          href: "Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04d.html"
+        - text: "Hands-on Exercise 5a"
+          href: "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05a.html"
+        - text: "Hands-on Exercise 5b"
+          href: "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05b.html"
+        - text: "Hands-on Exercise 5c"
+          href: "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05c.html"
+        - text: "Hands-on Exercise 5d"
+          href: "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05d.html"
+        - text: "Hands-on Exercise 5e"
+          href: "Hands-on_Ex/Hands-on_Ex05/Hands-on_Ex05e.html"
+    - text: " In-class Exercise"
       menu: 
         - text: "In-class Exercise 1"
           href: "In-class_Ex/In-class_Ex01/In-class_Ex01.html"
-    - text: "{{< fa magnifying-glass-chart >}} Take-home Exercise"
+    - text: " Take-home Exercise"
       menu: 
         - text: "Take-home Exercise 1"
           href: "Take-home_Ex/Take-home_Ex01/Take-home_Ex01.html"
         - text: "Take-home Exercise 2"
           href: "Take-home_Ex/Take-home_Ex02/Take-home_Ex02.html"  
-    - text: "{{< fa laptop-code >}} Projects"
+    - text: "Projects"
       menu:
         - text: "Comming soon"
     right: 
