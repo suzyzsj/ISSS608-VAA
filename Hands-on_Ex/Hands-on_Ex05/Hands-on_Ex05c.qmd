@@ -18,11 +18,11 @@ Heatmaps visualise data through variations in colouring. When applied to a tabul
 pacman::p_load(seriation, dendextend, heatmaply, tidyverse)
 ```
 
-##  **Importing and Preparing The Data Set**
+## **Importing and Preparing The Data Set**
 
 In this hands-on exercise, the data of [World Happines 2018 report](https://worldhappiness.report/ed/2018/) will be used. The data set is downloaded from [here](https://s3.amazonaws.com/happiness-report/2018/WHR2018Chapter2OnlineData.xls). The original data set is in Microsoft Excel format. It has been extracted and saved in csv file called **WHData-2018.csv**.
 
-###  **Importing the data set**
+### **Importing the data set**
 
 In the code chunk below, **read_csv()** of *readr* is used to import WHData-2018.csv into R and parsed it into tibble R data frame format.
 
@@ -69,7 +69,7 @@ There are many R packages and functions can be used to drawing static heatmaps, 
 
 -   [**superheat**](https://cran.r-project.org/web/packages/superheat/) package: A Graphical Tool for Exploring Complex Datasets Using Heatmaps. A system for generating extendable and customizable heatmaps for exploring complex datasets, including big data and data with multiple data types. The full reference guide of the package is available [here](https://rlbarter.github.io/superheat/).
 
-###  **heatmap() of R Stats**
+### **heatmap() of R Stats**
 
 In this sub-section, we will plot a heatmap by using *heatmap()* of Base Stats. The code chunk is given below.
 
@@ -167,7 +167,7 @@ Different from Scaling, the normalise method is performed on the input data set 
 heatmaply(normalize(wh_matrix[, -c(1, 2, 4, 5)]))
 ```
 
-####  Percentising method
+#### Percentising method
 
 -   This is similar to ranking the variables, but instead of keeping the rank values, divide them by the maximal rank.
 
