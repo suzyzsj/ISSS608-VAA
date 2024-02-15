@@ -1,0 +1,369 @@
+---
+title: "Take-home Exercise 3 ：Be Weatherwise or Otherwise"
+author: "Zhang Shujie (Suzy)"
+date: "February 14,2024"
+date-modified: "last-modified"
+execute: 
+  eval: true
+  echo: true
+  warning: false
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: visual
+---
+
+# **1 Overview**
+
+According to an office report as shown in the infographic below,
+
+-   Daily mean temperature are projected to increase by 1.4 to 4.6, and
+
+-   The contrast between the wet months (November to January) and dry month (February and June to September) is likely to be more pronounced.
+
+![](images/clipboard-3660007173.png)
+
+An increase in the intensity of weather variability could present significant challenges to the management of our water resources. Periods of drought can affect the reliability of Singapore’s water supply, while sudden episodes of intense rainfall could overwhelm our drainage system and lead to flash floods.
+
+![](images/clipboard-1870668638.png)
+
+*Source: Ministry of Sustainability and the Environment*
+
+# **2 Data** Collection
+
+I will choose rainfall records of a month of the year 1983, 1993, 2003, 2013 and 2023 in **Sentosa Island** and create an analytics-driven data visualisation.
+
+Because I want to verify that The contrast between the wet months (November to January) and dry month (February and June to September) is likely to be more pronounced. So I will download precipitation data for December (wet month) and August (dry month) for different years.
+
+Download the data from <http://www.weather.gov.sg/climate-historical-daily/>
+
+![](images/clipboard-2112176729.png)
+
+![](images/clipboard-1371729253.png)
+
+Now I've downloaded all the data I need.
+
+Such as the following file, which contains data for December and August in 1983, 1993, 2003, 2013 and 2023 in Sentosa Island
+
+![](images/clipboard-1252933479.png)
+
+# **3 Installing and Launching R Packages**
+
+1.  [**tidyverse**](https://www.tidyverse.org/), a family of modern R packages specially designed to support data science, analysis and communication task including creating static statistical graphs.
+
+2.  [**ggiraph**](https://davidgohel.github.io/ggiraph/) for making ‘ggplot’ graphics interactive.
+
+3.  [**plotly**](https://plotly.com/r/), R library for plotting interactive statistical graphs.
+
+4.  **ggdist**, for visualising distribution and uncertainty.
+
+5.  **ggthemes**, an R package provides some extra themes, geoms, and scales for ‘ggplot2’.
+
+6.  **ggridges,** a ggplot2 extension specially designed for plotting ridgeline plots
+
+```{r}
+#| code-fold: false
+pacman::p_load(tidyverse,plotly,ggiraph,ggdist,ggthemes,ggridges)
+```
+
+# **4 Data Preparation**
+
+## 4.1 Data Extraction
+
+I will first extract the valuable variables. I have selected 'Year', 'Month', 'Day', 'Daily Rainfall Total (mm)' as the variables for subsequent analysis. Below are two methods for organizing the data. The second method utilizes the lapply function, which makes data integration more convenient when iterating over multiple files.
+
+::: panel-tabset
+## Method 1
+
+```{r}
+#| code-fold: false
+data1 <- read_csv("data/DAILYDATA_S60_198308.csv",locale=locale(encoding="latin1"))
+data1 <- data1 %>% select(Year, Month, Day, `Daily Rainfall Total (mm)`)
+
+data2 <- read_csv("data/DAILYDATA_S60_199308.csv",locale=locale(encoding="latin1"))
+data2 <- data2 %>% select(Year, Month, Day, `Daily Rainfall Total (mm)`)
+
+data3 <- read_csv("data/DAILYDATA_S60_200308.csv",locale=locale(encoding="latin1"))
+data3 <- data3 %>% select(Year, Month, Day, `Daily Rainfall Total (mm)`)
+
+data4 <- read_csv("data/DAILYDATA_S60_201308.csv",locale=locale(encoding="latin1"))
+data4 <- data4 %>% select(Year, Month, Day, `Daily Rainfall Total (mm)`)
+
+data5 <- read_csv("data/DAILYDATA_S60_202308.csv",locale=locale(encoding="latin1"))
+data5 <- data5 %>% select(Year, Month, Day, `Daily Rainfall Total (mm)`)
+
+data6 <- read_csv("data/DAILYDATA_S60_198312.csv",locale=locale(encoding="latin1"))
+data6 <- data6 %>% select(Year, Month, Day, `Daily Rainfall Total (mm)`)
+
+data7 <- read_csv("data/DAILYDATA_S60_199312.csv",locale=locale(encoding="latin1"))
+data7 <- data7 %>% select(Year, Month, Day, `Daily Rainfall Total (mm)`)
+
+data8 <- read_csv("data/DAILYDATA_S60_200312.csv",locale=locale(encoding="latin1"))
+data8 <- data8 %>% select(Year, Month, Day, `Daily Rainfall Total (mm)`)
+
+data9 <- read_csv("data/DAILYDATA_S60_201312.csv",locale=locale(encoding="latin1"))
+data9 <- data9 %>% select(Year, Month, Day, `Daily Rainfall Total (mm)`)
+
+data10 <- read_csv("data/DAILYDATA_S60_202312.csv",locale=locale(encoding="latin1"))
+data10 <- data10 %>% select(Year, Month, Day, `Daily Rainfall Total (mm)`)
+```
+
+## Method 2
+
+```{r}
+#| code-fold: false
+file_names <- c("DAILYDATA_S60_198308.csv", "DAILYDATA_S60_199308.csv", "DAILYDATA_S60_200308.csv","DAILYDATA_S60_201308.csv", "DAILYDATA_S60_202308.csv", "DAILYDATA_S60_198312.csv","DAILYDATA_S60_199312.csv", "DAILYDATA_S60_200312.csv", "DAILYDATA_S60_201312.csv","DAILYDATA_S60_202312.csv")
+
+file_path_prefix <- "data/"
+
+data_list <- lapply(file_names, function(file_name) {
+  file_path <- paste0(file_path_prefix, file_name) 
+  read_csv(file_path, locale = locale(encoding = "latin1")) %>%
+    select(Year, Month, Day, `Daily Rainfall Total (mm)`)
+})
+```
+:::
+
+## 4.2 Check Data Type
+
+To ensure that the tables can be merged, we need to make sure that the data type of the 'Daily Rainfall Total (mm)' column is the same, specifically numeric type, so we took actions to unify the data type.
+
+```{r}
+#| code-fold: false
+data_frames <- list(data1, data2, data3, data4, data5, data6, data7, data8, data9, data10)
+data_frames <- lapply(data_frames, function(df) {
+    df$`Daily Rainfall Total (mm)` <- as.numeric(as.character(df$`Daily Rainfall Total (mm)`))
+    return(df)
+})
+
+combined_data <- bind_rows(data_frames)
+
+write_rds(combined_data, "data/combined_data.rds")
+
+combined_data <- read_rds("data/combined_data.rds")
+```
+
+## 4.3 New column
+
+To make the rainfall amount and its corresponding time more clear in the table for visualization purposes, I will add a 'Date' column, facilitating further visual analysis later on.
+
+```{r}
+#| code-fold: false
+combined_data$Date <- as.Date(paste(combined_data$Year, combined_data$Month, combined_data$Day, sep = "-"))
+final_data <- combined_data[, c('Year','Month','Day','Date','Daily Rainfall Total (mm)' )]
+```
+
+## 4.4 Final Dataset
+
+The final data presented has 5 variables, 5 columns, and 310 rows. Additionally, it confirms that the years and months are those that I intend to study.
+
+::: panel-tabset
+## The Result
+
+```{r}
+#| code-fold: false
+final_data
+
+unique_years <- unique(final_data$Year)
+unique_years
+
+unique_months <- unique(final_data$Month)
+unique_months
+```
+:::
+
+# 5 Analytical thinking
+
+If I want to explore the rainfall data for the years 1983, 1993, 2003, 2013, and 2023, I am considering investigating from the following three aspects:
+
+1.  Whether the rainfall amount in the dry month of August decreases over the years, and what the trend looks like?
+
+    ![](images/6401708005237_.pic-01.jpg){width="500"}
+
+2.  Whether the rainfall amount in the wet month of December increases over the years, and what the trend looks like?
+
+    ![](images/6381708005236_.pic-01.jpg){width="500"}
+
+3.  Whether the gap between the dry month and wet month widens as the years change?
+
+![](images/6391708005236_.pic-01.jpg){width="500"}
+
+These three hypotheses are used to validate the statement from NCCS: "The contrast between the wet months (November to January) and the dry month (February and June to September) is likely to be more pronounced."
+
+# 6 Data Visualization
+
+## 6.1 Dry month
+
+To start with, I will filter the data for August from the final_data and calculate the average rainfall for the month of August each year.
+
+```{r}
+#| code-fold: false
+august_data <- filter(final_data, Month == 8)
+
+average_rainfall_by_year <- august_data %>%
+  group_by(Year) %>%
+  summarise(Average_Rainfall = mean(`Daily Rainfall Total (mm)`, na.rm = TRUE))
+```
+
+For this visualization, when you hover the mouse over a specific data point, a tooltip will appear displaying the date and the corresponding rainfall for that day. A lightblue line connecting these points represents the average rainfall for August of each year, allowing us to observe whether there is a significant increase in rainfall as the years progress.
+
+```{r}
+p <- plot_ly() %>%
+  add_trace(
+    data = august_data,
+    x = ~Year, y = ~`Daily Rainfall Total (mm)`,
+    type = 'box',
+    marker = list(color = '#E2A79A'),
+    boxpoints = 'all',  
+    jitter = 0.3,  
+    pointpos = -1.8 , 
+    text = ~paste('Date:', Date, '<br>Rainfall (mm):', `Daily Rainfall Total (mm)`),  
+    hoverinfo = 'text'  
+  ) %>%
+  add_trace(
+    data = average_rainfall_by_year,
+    x = ~Year, y = ~Average_Rainfall,
+    type = 'scatter',  
+    mode = 'markers+lines',  
+    marker = list(color = 'lightblue', size = 10),
+    line = list(color = 'lightblue', width = 2)
+  ) %>%
+  layout(
+    title = "August Rainfall Distribution by Year",
+    yaxis = list(title = "Daily Rainfall Total (mm)", range = c(0, 40)),
+    xaxis = list(title = "Year", tickvals = c(1983, 1993, 2003, 2013, 2023)),
+    hovermode = 'closest'
+  )
+
+
+p <- p %>% 
+  add_trace(
+    data = august_data,
+    x = ~Year, y = ~`Daily Rainfall Total (mm)`,
+    text = ~paste('Date:', Date, '<br>Rainfall (mm):', `Daily Rainfall Total (mm)`),
+    hoverinfo = 'text',
+    type = 'scatter',
+    mode = 'markers',
+    marker = list(color = 'transparent')  
+  )
+
+p <- p %>% layout(showlegend = FALSE)
+p <- p %>% layout(hoverlabel = list(namelength = 0))
+
+p
+
+```
+
+::: insightbox
+### 🔍**Insights**
+
+By connecting the median rainfall of each year with a line (which is lightblue), we can observe a fluctuating trend. In certain years, like 1993 and 2013, the median rainfall seems to have increased, while in other years, such as 1983 and 2023, it appears to have decreased. Overall, there is a slight downward trend, but it's not particularly pronounced. However, from the boxplot, it can be seen that there are more days without rain.
+:::
+
+## 6.2 Wet month
+
+For December, the operation would be the same. I will filter the data for December from the final_data and calculate the average rainfall for the month of December each year.
+
+```{r}
+#| code-fold: false
+december_data <- filter(final_data, Month == 12)
+
+average_rainfall_by_year <- december_data %>%
+  group_by(Year) %>%
+  summarise(Average_Rainfall = mean(`Daily Rainfall Total (mm)`, na.rm = TRUE))
+```
+
+Also in this visualization, when you hover the mouse over a specific data point, a tooltip will appear displaying the date and the corresponding rainfall for that day.
+
+```{r}
+p <- plot_ly() %>%
+  add_trace(
+    data = december_data,
+    x = ~Year, y = ~`Daily Rainfall Total (mm)`,
+    type = 'box',
+    marker = list(color = '#E2A79A'),
+    boxpoints = 'all',  
+    jitter = 0.3,  
+    pointpos = -1.8 , 
+    text = ~paste('Date:', Date, '<br>Rainfall (mm):', `Daily Rainfall Total (mm)`),  # 添加日期信息
+    hoverinfo = 'text' 
+  ) %>%
+  add_trace(
+    data = average_rainfall_by_year,
+    x = ~Year, y = ~Average_Rainfall,
+    type = 'scatter', 
+    mode = 'markers+lines', 
+    marker = list(color = 'lightblue', size = 10),
+    line = list(color = 'lightblue', width = 2)
+  ) %>%
+  layout(
+    title = "December Rainfall Distribution by Year",
+    yaxis = list(title = "Daily Rainfall Total (mm)", range = c(0,40)),
+    xaxis = list(title = "Year", tickvals = c(1983, 1993, 2003, 2013, 2023)),
+    hovermode = 'closest'
+  )
+
+
+p <- p %>% 
+  add_trace(
+    data = december_data,
+    x = ~Year, y = ~`Daily Rainfall Total (mm)`,
+    text = ~paste('Date:', Date, '<br>Rainfall (mm):', `Daily Rainfall Total (mm)`),
+    hoverinfo = 'text',
+    type = 'scatter',
+    mode = 'markers',
+    marker = list(color = 'transparent')  
+  )
+
+p <- p %>% layout(showlegend = FALSE)
+p <- p %>% layout(hoverlabel = list(namelength = 0))
+
+p
+
+```
+
+::: insightbox
+### 🔍**Insights**
+
+The daily rainfall in December shows significant fluctuations across different years, with some years (like 1983) having a lower median, while others (like 2023) are higher, but there is no clear consistent upward or downward trend. In 2023, there were extreme rainfall events, with several days having high amounts of rainfall. The variation in the size of the boxplot also reflects the increased overall variability in 2023.
+:::
+
+## 6.3 Comparison between August and December
+
+\
+In the decades under examination, there is a clear difference in the rainfall distribution between August and December, and this difference may have increased over time. Therefore, I would like to conduct a preliminary comparison using density plots to see if any insights can be uncovered.
+
+```{r}
+august_december_data <- final_data %>%
+  filter(Month %in% c(8, 12)) %>%
+  mutate(Month = factor(Month, levels = c(8, 12), labels = c("August", "December")),
+         Year = as.factor(Year))  
+
+p <- ggplot(august_december_data, aes(x = `Daily Rainfall Total (mm)`, y = Year, fill = Month)) +
+  geom_density_ridges() +
+  scale_fill_manual(values = c("August" = "#F0776F", "December" = "#B7E585")) +
+  labs(title = "Comparison of Rainfall Distribution between August and December",
+       x = "Rainfall (mm)",
+       y = "Year") +
+  theme_ridges() +
+  theme(legend.position = "right")
+
+p
+```
+
+::: insightbox
+### 🔍**Insights**
+
+Trend Over the Years: In the earlier years (such as 1983 and 1993), the density distribution peaks of rainfall in August and December were relatively close; however, in later years (like 2013 and 2023), the difference between the two months seems to be more pronounced.
+
+Extreme Rainfall Events: Particularly in 2023, the rainfall density curve for December shows a high peak and a long tail, possibly indicating a higher occurrence of extreme rainfall events during this month.
+:::
+
+# 7 Conclusion
+
+Based on the interactive visualization analysis, I observed that there is a trend of decreasing rainfall during the dry season over time, although this trend is not pronounced and does not definitively indicate a trend or problem.
+
+The rainfall during the wet season shows an increasing trend, and the difference in rainfall distribution between August and December appears to become more pronounced in certain years, especially in the data for 2013 and 2023. This analysis suggests that with changes over the years, extreme rainfall events are likely to occur more frequently, which could be inferred as an indication that climate change may lead to more frequent extreme rainfall events.
+
+However, to arrive at scientific conclusions, more data is required, along with consideration of additional climate, environmental, and human factors.
