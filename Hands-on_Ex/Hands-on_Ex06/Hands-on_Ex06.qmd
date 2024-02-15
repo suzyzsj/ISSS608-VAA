@@ -1,5 +1,5 @@
 ---
-title: "Hands-on Exercise 5e:Treemap Visualisation with R"
+title: "Hands-on Exercise 6:Visualising and Analysing Time-oriented Data"
 author: "Zhang Shujie (Suzy)"
 execute: 
   eval: true
