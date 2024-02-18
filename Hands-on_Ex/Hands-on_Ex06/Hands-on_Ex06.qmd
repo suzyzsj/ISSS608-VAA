@@ -31,7 +31,7 @@ For the purpose of this hands-on exercise, *eventlog.csv* file will be used. Thi
 ### **Importing the data**
 
 ```{r}
-attacks <- read_csv("/Users/zhangshujie/Desktop/SMU/Term 2/Visual/suzyzsj/ISSS608-VAA/Hands-on_Ex/Hands-on_Ex06/data/eventlog.csv")
+attacks <- read_csv("data/eventlog.csv")
 ```
 
 ### **Examining the data structure**

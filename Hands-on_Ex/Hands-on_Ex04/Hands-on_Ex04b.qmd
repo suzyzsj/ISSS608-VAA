@@ -29,7 +29,7 @@ pacman::p_load(ggstatsplot, tidyverse)
 ### **Importing data**
 
 ```{r}
-exam <- read_csv("/Users/zhangshujie/Desktop/SMU/Term 2/Visual/suzyzsj/ISSS608-VAA/Hands-on_Ex/Hands-on_Ex04/data/Exam_data.csv")
+exam <- read_csv("data/Exam_data.csv")
 exam
 ```
 

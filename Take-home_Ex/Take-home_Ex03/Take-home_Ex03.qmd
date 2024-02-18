@@ -201,7 +201,7 @@ To start with, I will filter the data for August from the final_data and calcula
 #| code-fold: false
 august_data <- filter(final_data, Month == 8)
 
-average_rainfall_by_year <- august_data %>%
+average_rainfall_by_year_august <- august_data %>%
   group_by(Year) %>%
   summarise(Average_Rainfall = mean(`Daily Rainfall Total (mm)`, na.rm = TRUE))
 ```
@@ -222,7 +222,7 @@ p <- plot_ly() %>%
     hoverinfo = 'text'  
   ) %>%
   add_trace(
-    data = average_rainfall_by_year,
+    data = average_rainfall_by_year_august,
     x = ~Year, y = ~Average_Rainfall,
     type = 'scatter',  
     mode = 'markers+lines',  
@@ -269,7 +269,7 @@ For December, the operation would be the same. I will filter the data for Decemb
 #| code-fold: false
 december_data <- filter(final_data, Month == 12)
 
-average_rainfall_by_year <- december_data %>%
+average_rainfall_by_year_december <- december_data %>%
   group_by(Year) %>%
   summarise(Average_Rainfall = mean(`Daily Rainfall Total (mm)`, na.rm = TRUE))
 ```
@@ -282,7 +282,9 @@ p <- plot_ly() %>%
     data = december_data,
     x = ~Year, y = ~`Daily Rainfall Total (mm)`,
     type = 'box',
-    marker = list(color = '#E2A79A'),
+    marker = list(color = '#A79AE2'),
+    line = list(color = 'orange'),
+    fillcolor = list(color = 'orange',alpha=0.5),
     boxpoints = 'all',  
     jitter = 0.3,  
     pointpos = -1.8 , 
@@ -290,12 +292,12 @@ p <- plot_ly() %>%
     hoverinfo = 'text' 
   ) %>%
   add_trace(
-    data = average_rainfall_by_year,
+    data = average_rainfall_by_year_december,
     x = ~Year, y = ~Average_Rainfall,
     type = 'scatter', 
     mode = 'markers+lines', 
-    marker = list(color = 'lightblue', size = 10),
-    line = list(color = 'lightblue', width = 2)
+    marker = list(color = '#E2A79A', size = 10),
+    line = list(color = '#E2A79A', width = 2)
   ) %>%
   layout(
     title = "December Rainfall Distribution by Year",
@@ -329,7 +331,76 @@ p
 The daily rainfall in December shows significant fluctuations across different years, with some years (like 1983) having a lower median, while others (like 2023) are higher, but there is no clear consistent upward or downward trend. In 2023, there were extreme rainfall events, with several days having high amounts of rainfall. The variation in the size of the boxplot also reflects the increased overall variability in 2023.
 :::
 
-## 6.3 Comparison between August and December
+## 6.3 Combine Dry month and Wet month
+
+```{r}
+p <- plot_ly() %>%
+
+  add_trace(
+    data = august_data,
+    x = ~Year, y = ~`Daily Rainfall Total (mm)`,
+    type = 'box',
+    name = "August",
+    marker = list(color = '#E2A79A'),
+    boxpoints = 'all',
+    jitter = 0.3,
+    pointpos = -1.8,
+    text = ~paste('Date:', Date, '<br>Rainfall (mm):', `Daily Rainfall Total (mm)`),
+    hoverinfo = 'text'
+  ) %>%
+
+  add_trace(
+    data = december_data,
+    x = ~Year, y = ~`Daily Rainfall Total (mm)`,
+    type = 'box',
+    name = "December",
+    marker = list(color = '#A79AE2'),
+    boxpoints = 'all',
+    jitter = 0.3,
+    pointpos = -1.8,
+    text = ~paste('Date:', Date, '<br>Rainfall (mm):', `Daily Rainfall Total (mm)`),
+    hoverinfo = 'text'
+  ) %>%
+
+  add_trace(
+    data = average_rainfall_by_year_august,
+    x = ~Year, y = ~Average_Rainfall,
+    type = 'scatter',
+    mode = 'markers+lines',
+    name = "Average Rainfall August",
+    marker = list(color = 'lightblue', size = 10),
+    line = list(color = 'lightblue', width = 2)
+  ) %>%
+
+  add_trace(
+    data = average_rainfall_by_year_december,
+    x = ~Year, y = ~Average_Rainfall,
+    type = 'scatter',
+    mode = 'markers+lines',
+    name = "Average Rainfall December",
+    marker = list(color = '#E2A79A',size = 10),
+    line = list(color = '#E2A79A', width = 2)
+  ) %>%
+
+  layout(
+    title = "Rainfall Distribution by Year for August and December",
+    yaxis = list(title = "Daily Rainfall Total (mm)", range = c(0, 40)),
+    xaxis = list(title = "Year", tickvals = c(1983, 1993, 2003, 2013, 2023)),
+    hovermode = 'closest',
+    showlegend = TRUE
+  ) %>%
+  layout(hoverlabel = list(namelength = 0))
+
+p
+```
+
+-   This interactive visualization combines the plots from sections 6.1 and 6.2.
+
+-   The **light blue** box plots and **salmon** scatter plots represent the precipitation data for August. When hovering over a point, you can see the corresponding date and the total daily precipitation. When hovering over a point on the line graph, you will see the year and the average precipitation for August of that year.
+
+-   The **orange box** plots and **purple** scatter plots represent the precipitation data for December. When hovering over a point, you can see the corresponding date and the total daily precipitation. When hovering over a point on the line graph, you will see the year and the average precipitation for December of that year.
+
+## 6.4 Comparison between August and December
 
 \
 In the decades under examination, there is a clear difference in the rainfall distribution between August and December, and this difference may have increased over time. Therefore, I would like to conduct a preliminary comparison using density plots to see if any insights can be uncovered.

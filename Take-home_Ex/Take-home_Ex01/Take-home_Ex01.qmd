@@ -86,7 +86,7 @@ Read 'stu_qqq_SG'file.
 
 ```{r}
 #| code-fold: false
-stu_qqq_SG <- read_rds("/Users/zhangshujie/Desktop/SMU/Term 2/Visual/suzyzsj/ISSS608-VAA/In-class_Ex/In-class_Ex01/data/stu_qqq_SG.rds")
+stu_qqq_SG <- read_rds("data/stu_qqq_SG.rds")
 ```
 
 ### **3.2.1 Research Variable Selection**
