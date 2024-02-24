@@ -4,6 +4,7 @@ author: "Zhang Shujie (Suzy)"
 execute: 
   eval: true
   echo: true
+  freeze: true
   warning: false
 editor: visual
 ---
@@ -133,6 +134,7 @@ In **Plotly R** package, both `ggplotly()` and `plot_ly()` support key frame ani
 
 ::: panel-tabset
 ### The plot
+
 ```{r}
 #| echo: false
 gg <- ggplot(globalPop, 

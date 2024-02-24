@@ -4,6 +4,7 @@ author: "Zhang Shujie (Suzy)"
 execute: 
   eval: true
   echo: true
+  freeze: true
   warning: false
 editor: visual
 ---
@@ -141,7 +142,7 @@ The treemap above was wrongly coloured. For a correctly designed treemap, the co
 
 For *treemap()*, *vColor* is used in combination with the argument *type* to determines the colours of the rectangles. Without defining *type*, like the code chunk above, *treemap()* assumes type = index, in our case, the hierarchy of planning areas.
 
-###  **Working with *vColor* and *type* arguments**
+### **Working with *vColor* and *type* arguments**
 
 In the code chunk below, *type* argument is define as value.
 

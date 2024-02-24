@@ -6,6 +6,7 @@ date-modified: "last-modified"
 execute: 
   eval: true
   echo: true
+  freeze: true
   warning: false
 format:
   html:
@@ -438,3 +439,5 @@ Based on the interactive visualization analysis, I observed that there is a tren
 The rainfall during the wet season shows an increasing trend, and the difference in rainfall distribution between August and December appears to become more pronounced in certain years, especially in the data for 2013 and 2023. This analysis suggests that with changes over the years, extreme rainfall events are likely to occur more frequently, which could be inferred as an indication that climate change may lead to more frequent extreme rainfall events.
 
 However, to arrive at scientific conclusions, more data is required, along with consideration of additional climate, environmental, and human factors.
+
+

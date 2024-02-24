@@ -1,5 +1,6 @@
 ---
 title: "In-class Exercise 1:Now You See It!"
+author: "Zhang Shujie (Suzy)"
 date: "January 13,2024"
 date-modified: "last-modified"
 execute: 

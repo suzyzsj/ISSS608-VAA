@@ -4,6 +4,7 @@ author: "Zhang Shujie (Suzy)"
 execute: 
   eval: true
   echo: true
+  freeze: true
   warning: false
 editor: visual
 ---
