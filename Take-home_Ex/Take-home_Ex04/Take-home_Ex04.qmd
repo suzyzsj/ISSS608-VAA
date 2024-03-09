@@ -1,0 +1,184 @@
+---
+title: "Take-home Exercise 4 ：Prototyping Modules for Be Weatherwise or Otherwise"
+author: "Zhang Shujie (Suzy)"
+date: "March 8,2024"
+date-modified: "last-modified"
+execute: 
+  eval: true
+  echo: true
+  freeze: true
+  warning: false
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+editor: visual
+---
+
+# **1 Overview**
+
+# **2 Data Preparation**
+
+## **2.1 Loading R Packages**
+
+In this take-home exercise, the key R package use is [tmap](https://cran.r-project.org/web/packages/tmap/) package in R. Beside tmap package, four other R packages will be used. They are:
+
+-   [**readr**](https://readr.tidyverse.org/) for importing delimited text file,
+
+-   [**tidyr**](https://tidyr.tidyverse.org/) for tidying data
+
+-   [**dplyr**](https://dplyr.tidyverse.org/) for wrangling data
+
+-   [**sf**](https://cran.r-project.org/web/packages/sf/) for handling geospatial data.
+
+Among the four packages, readr, tidyr and dplyr are part of tidyverse package.
+
+The code chunk below will be used to install and load these packages in RStudio.
+
+```{r}
+pacman::p_load(sf, tmap, tidyverse, readxl, leaflet)
+```
+
+## **2.2 Importing Data**
+
+```{r}
+weather_data <- read.csv("data/weather_data.csv")
+station_records <- read_excel("data/station_records.xlsx")
+```
+
+## **2.3 Summary Statistics of Data**
+
+```{r}
+str(weather_data)
+```
+
+```{r}
+summary(weather_data)
+```
+
+```{r}
+# 预处理数据：将所有列转换为字符型并替换空字符串以及特殊字符为NA
+data_processed <- weather_data %>%
+  mutate(across(everything(), as.character)) %>%  # 将所有列转换为字符型
+  mutate(across(everything(), ~na_if(.x, ""))) %>%  # 将空字符串替换为NA
+  mutate(across(everything(), ~na_if(.x, "�")))  # 将特殊字符替换为NA
+
+# 计算每个站点的缺失值总数
+missing_values_by_station <- data_processed %>%
+  group_by(Station) %>%
+  summarise(across(everything(), ~sum(is.na(.), na.rm = TRUE), .names = "missing_{.col}")) %>%
+  mutate(TotalMissing = rowSums(select(., starts_with("missing")))) %>%
+  select(Station, TotalMissing) %>%
+  arrange(desc(TotalMissing))
+
+missing_values_by_station <- missing_values_by_station %>%
+  mutate(across(everything(), ~ifelse(is.na(.), "-", .)))
+
+missing_values_by_station
+```
+
+
+
+
+```{r}
+
+# 将'Mean.Temperature...C.'列中的非数值替换为NA，并转换为数值类型
+weather_data <- weather_data %>%
+  mutate(`Mean.Temperature...C.` = na_if(`Mean.Temperature...C.`, "-")) %>%
+  mutate(Mean_Temperature_C = as.numeric(`Mean.Temperature...C.`))
+
+# 选择一个数据较全面的月份，这里以2023年1月为例
+weather_data_january <- weather_data %>%
+  filter(Year == 2023, Month == 1, !is.na(Mean_Temperature_C))
+
+# 计算每个站点在2023年1月的平均气温
+average_temperatures_january <- weather_data_january %>%
+  group_by(Station) %>%
+  summarise(Avg_Temp_January = mean(Mean_Temperature_C, na.rm = TRUE)) %>%
+  ungroup()
+
+# 将平均气温数据与站点地理位置信息合并
+data_merged <- merge(station_records, average_temperatures_january, by = "Station")
+
+
+```
+
+```{r}
+# 创建颜色映射函数，使用反转的viridis颜色板
+colorPalette <- colorNumeric(palette = rev(viridis::viridis(256)), domain = data_merged$Avg_Temp_January)
+
+m <- leaflet(data_merged) %>%
+  addTiles() %>%  # 添加默认的地图图块
+  addCircleMarkers(
+    ~Longitude, ~Latitude,
+    radius = 7,  # 设置固定大小的半径值
+    popup = ~paste(Station, "January 2023 Avg. Temp:", Avg_Temp_January, "°C"),  # 弹出窗口内容
+    fillColor = ~colorPalette(Avg_Temp_January),  # 根据平均气温映射颜色
+    fillOpacity = 0.7,  # 填充颜色的不透明度
+    color = "black",  # 圆圈的边框颜色
+    weight = 1  # 圆圈的边框宽度
+  ) %>%
+  addLegend(
+    position = "topright",  # 图例位置
+    title = "Avg. Temp (°C)",  # 图例标题
+    pal = colorPalette,  # 颜色映射函数
+    values = ~Avg_Temp_January,  # 依据的值
+    opacity = 0.7,  # 图例标记的不透明度
+    labFormat = labelFormat(suffix = "°C")  # 标签格式
+  )
+
+
+# 显示地图
+m
+
+```
+
+```{r}
+# 检查合并后的数据集中有多少个独特的站点
+unique_stations <- unique(data_merged$Station)
+num_unique_stations <- length(unique_stations)
+
+# 打印站点数量
+print(num_unique_stations)
+
+# 如果需要查看哪些站点被包括了，可以打印unique_stations
+print(unique_stations)
+```
+
+```{r}
+library(leaflet)
+library(viridis) # 确保加载viridis包，以便使用viridis颜色板
+
+# 确保data_merged包含了您想展示的年份信息
+# 这里假设data_merged已经有了年份信息，且年份是统一的（例如，都是2023年）
+
+
+# 创建颜色映射函数，使用反转的viridis颜色板
+colorPalette <- colorNumeric(palette = rev(viridis(256)), domain = data_merged$Avg_Temp_January)
+
+m <- leaflet(data_merged) %>%
+  addTiles() %>%  # 添加默认的地图图块
+  addCircleMarkers(
+    ~Longitude, ~Latitude,
+    radius = 7,  # 设置固定大小的半径值
+    popup = ~paste(Station, "<br>Year: 2023<br>Month: Jan<br>Avg. Temp:", round(Avg_Temp_January, 2), "°C"),  
+    # 弹出窗口内容
+    fillColor = ~colorPalette(Avg_Temp_January),  # 根据平均气温映射颜色
+    fillOpacity = 0.7,  # 填充颜色的不透明度
+    weight = 1  # 圆圈的边框宽度
+  ) %>%
+  addLegend(
+    position = "topright",  # 图例位置
+    title = "Avg. Temp (°C)",  # 图例标题
+    pal = colorPalette,  # 颜色映射函数
+    values = ~Avg_Temp_January,  # 依据的值
+    opacity = 0.7,  # 图例标记的不透明度
+    labFormat = labelFormat(suffix = "°C")  # 标签格式
+  )
+
+# 显示地图
+m
+```
+
+
+
