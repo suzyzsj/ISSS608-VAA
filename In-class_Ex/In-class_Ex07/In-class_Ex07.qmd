@@ -6,6 +6,7 @@ date-modified: "last-modified"
 execute: 
   eval: true
   echo: true
+  freeze: true
   message: false
   warning: false
 editor: visual
@@ -22,7 +23,7 @@ In this in-class exercise, beside tidyverse, viridis, sf and tmap libaries, two 
 -   [automap](https://cran.r-project.org/web/packages/automap/), an r package for performing automatic variogram modelling and kriging interpolation.
 
 ```{r}
-pacman::p_load(sf,terra,gstat,tmap,vireidis,tidyverse)
+pacman::p_load(sf,terra,gstat,automap, tmap,vireidis,tidyverse)
 ```
 
 ## **The Data**
@@ -91,8 +92,9 @@ rfdata_sf <- st_as_sf(rfdata,
 :::
 
 ```{r}
-mpsz2019 <-st_read(dsn = "data/geospatial",layer ="MPSZ-2019") %>%
-  st_transform(CRS =3414)
+mpsz2019 <- st_read(dsn = "data/geospatial1", 
+                    layer = "MPSZ-2019") %>%
+  st_transform(crs = 3414)
 ```
 
 ::: callout-note
