@@ -29,15 +29,9 @@ The data sets used in this hands-on exercise is from an oil exploration and extr
 
 -   *GAStech-email_edges.csv* which consists of two weeks of 9063 emails correspondances between 55 employees.
 
-![](images/clipboard-2751188371.png)
-
 ### **The nodes data**
 
--   *GAStech_email_nodes.csv* which consist of the names, department and title of the 55 employees.
-
-![](images/clipboard-986816479.png)
-
-### **Importing network data from files**
+-   *GAStech_email_nodes.csv* which consist of the names, department and title of the 55 employees.**Importing network data from files**
 
 In this step, you will import GAStech_email_node.csv and GAStech_email_edges-v2.csv into RStudio environment by using `read_csv()` of **readr** package.
 
@@ -136,8 +130,9 @@ Two functions of **tidygraph** package can be used to create network objects, th
 
 -   *activate()* verb from **tidygraph** serves as a switch between tibbles for nodes and edges. All dplyr verbs applied to **tbl_graph** object are applied to the active tibble.
 
-![](images/clipboard-1436355238.png)
-
+```{=html}
+<!-- -->
+```
 -   In the above the *.N()* function is used to gain access to the node data while manipulating the edge data. Similarly *.E()* will give you the edge data and *.G()* will give you the **tbl_graph** object itself.
 
 ### **Using `tbl_graph()` to build tidygraph data model.**
@@ -246,12 +241,6 @@ g + theme_graph(background = 'grey10',
 ### **Working with ggraph’s layouts**
 
 **ggraph** support many layout for standard used, they are: star, circle, nicely (default), dh, gem, graphopt, grid, mds, spahere, randomly, fr, kk, drl and lgl. Figures below and on the right show layouts supported by `ggraph()`.
-
-![](images/clipboard-2875183082.png)
-
-![](images/clipboard-4288888720.png)
-
-![](images/clipboard-1634677777.png)
 
 ### **Fruchterman and Reingold layout**
 
