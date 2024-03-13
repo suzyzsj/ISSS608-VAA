@@ -1117,7 +1117,7 @@
     "href": "Take-home_Ex/Take-home_Ex04/Take-home_Ex04.html#loading-r-packages",
     "title": "Take-home Exercise 4 ：Prototyping Modules for Be Weatherwise or Otherwise",
     "section": "2.1 Loading R Packages",
-    "text": "2.1 Loading R Packages\nIn this take-home exercise, the key R package use is tmap package in R. Beside tmap package, four other R packages will be used. They are:\n\nreadr for importing delimited text file,\ntidyr for tidying data\ndplyr for wrangling data\nsf for handling geospatial data.\ntmap for Creating thematic maps.\n\nAmong the four packages, readr, tidyr and dplyr are part of tidyverse package.\nThe code chunk below will be used to install and load these packages in RStudio.\n\npacman::p_load(ggplot2,readr,readxl, dplyr,lubridate,reshape2,pheatmap, tidyverse,sf,viridis,terra,gstat,tmap,tibble,leaflet)"
+    "text": "2.1 Loading R Packages\nIn this take-home exercise, the key R package use is tmap package in R. Beside tmap package, four other R packages will be used. They are:\n\nreadr for importing delimited text file,\ntidyr for tidying data\ndplyr for wrangling data\nsf for handling geospatial data.\ntmap for Creating thematic maps.\n\nAmong the four packages, readr, tidyr and dplyr are part of tidyverse package.\nThe cod,sf,spe chunk below will be used to install and load these packages in RStudio.\n\npacman::p_load(ggplot2,readr,readxl, dplyr,lubridate,reshape2,pheatmap, tidyverse,sf,sp,viridis,terra,gstat,tibble,leaflet,tmap)"
   },
   {
     "objectID": "Take-home_Ex/Take-home_Ex04/Take-home_Ex04.html#importing-data",

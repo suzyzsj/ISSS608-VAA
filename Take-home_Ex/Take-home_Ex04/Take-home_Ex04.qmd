@@ -55,11 +55,12 @@ In this take-home exercise, the key R package use is [tmap](https://cran.r-proje
 
 Among the four packages, readr, tidyr and dplyr are part of tidyverse package.
 
-The code chunk below will be used to install and load these packages in RStudio.
+The cod,sf,spe chunk below will be used to install and load these packages in RStudio.
 
 ```{r}
 #| code-fold: false
-pacman::p_load(ggplot2,readr,readxl, dplyr,lubridate,reshape2,pheatmap, tidyverse,sf,viridis,terra,gstat,tmap,tibble,leaflet)
+pacman::p_load(ggplot2,readr,readxl, dplyr,lubridate,reshape2,pheatmap, tidyverse,sf,sp,viridis,terra,gstat,tibble,leaflet,tmap)
+
 ```
 
 ## **2.2 Importing Data**
@@ -87,7 +88,6 @@ glimpse(data)
 ```
 
 From the basic overview of the data, we can see that there are 204,464 rows and 13 columns.
-
 
 ## **2.4 Cleanse missing values**
 
@@ -491,3 +491,15 @@ Cool colors (blue to purple) represent areas with lower temperatures.
 -   Eastern Region: The eastern region is situated on the right side of the graph, with average temperatures falling within a moderate range.
 
 -   Western Region: The western region is located on the left side of the graph, with temperatures leaning towards the higher side. The northwest tends to be slightly cooler, while temperatures in the southwest may be higher.
+
+# **5 UI Design**
+
+The initial idea is to be able to choose the year and the month, and have the corresponding temperature and the corresponding temperature appear.
+
+![](images/clipboard-2554666712.png)
+
+And it can also click the specific Station through the mouse to display all the corresponding information.
+
+![](images/clipboard-3741479958.png)
+
+Further ideas need to be developed.Interaction diagrams for additional analysis are also added.
