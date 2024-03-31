@@ -512,3 +512,149 @@ For the display of clusters, we will use a sliding bar to select the year. By ch
 ![](images/clipboard-930790976.png)
 
 Such results actually help residents to have a more intuitive awareness of the regional climate differences in Singapore, and provide constructive assistance for making decisions such as housing choices.
+
+# 6 SupplementaryPart
+
+```{r}
+# 加载必要的包
+library(dplyr)
+library(ggplot2)
+library(ggstatsplot)
+library(forcats)
+
+# 读取数据
+data <- read.csv("data/data_with_mean_temp.csv") 
+
+# 数据预处理 - 计算每个站点每年的平均温度
+temp_yearly_summary <- data %>%
+  group_by(Station, Year) %>%
+  summarise(Avg_Temp = mean(CalculatedMeanTemp, na.rm = TRUE), .groups = 'drop')
+
+# 排序并选择前五的站点基于年平均温度
+top_stations_summary <- temp_yearly_summary %>%
+  group_by(Station) %>%
+  summarise(Avg_Temp = mean(Avg_Temp, na.rm = TRUE), .groups = 'drop') %>%
+  arrange(desc(Avg_Temp)) %>%
+  slice_head(n = 5)
+
+top5_stations <- top_stations_summary$Station
+
+# 分析前五个站点的平均温度
+Analyze_Top_Stations_Temp <- function(metric = "Avg_Temp", 
+                                      selected_stations = top5_stations,
+                                      plot_type = "boxviolin",
+                                      test_type = "nonparametric",
+                                      pairwise_display = "non-significant",
+                                      pairwise_comparison = TRUE,
+                                      confidence_level = 0.95,
+                                      exclude_outliers = TRUE) {
+  
+  # 根据所选指标筛选和准备数据
+  temp_filtered <- temp_yearly_summary %>%
+    filter(Station %in% selected_stations)
+  
+  
+  # 使用ggstatsplot进行可视化和统计分析
+  ggbetweenstats(data = temp_filtered,
+                 x = Station,
+                 y = !!rlang::sym(metric),
+                 type = test_type,
+                 pairwise.comparisons = pairwise_comparison,
+                 pairwise.display = pairwise_display,
+                 plot.type = plot_type,
+                 conf.level = confidence_level,
+                 xlab = "Station",
+                 ylab = "Yearly Average Temperature")
+}
+
+# 执行分析函数
+Analyze_Top_Stations_Temp()
+
+```
+
+```{r}
+temp_yearly_summary <- data %>%
+  group_by(Station, Year) %>%
+  summarise(Avg_Temp = mean(CalculatedMeanTemp, na.rm = TRUE), .groups = 'drop')
+
+# 确定前五个站点
+top_stations_summary <- temp_yearly_summary %>%
+  group_by(Station) %>%
+  summarise(Avg_Temp = mean(Avg_Temp, na.rm = TRUE), .groups = 'drop') %>%
+  arrange(desc(Avg_Temp)) %>%
+  slice_head(n = 5)
+
+top5_stations <- top_stations_summary$Station
+
+# 筛选出这些站点的数据
+temp_filtered <- temp_yearly_summary %>%
+  filter(Station %in% top5_stations)
+
+ggplot(temp_filtered, aes(x = Station, y = Avg_Temp, fill = Station)) +
+  geom_boxplot(outlier.colour = "red", outlier.shape = 1) +
+  stat_summary(fun = "mean", geom = "point", shape = 20, size = 3, color = "blue", aes(group = Station)) +
+  stat_summary(fun = mean, geom = "text", aes(label = sprintf("%.2f", ..y..)), vjust = -0.5, color = "blue", size = 3.5) +
+  labs(title = "Yearly Average Temperature by Station",
+       x = "Station",
+       y = "Temperature (°C)") +
+  theme_minimal() +
+  theme(legend.title = element_blank())
+```
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(ggpubr)
+library(readr)
+
+# 读取数据
+data <- read_csv("data/data_with_mean_temp.csv")
+
+# 计算每个站点每月的平均温度
+data$Date <- as.Date(with(data, paste(Year, Month, Day, sep="-")), "%Y-%m-%d")
+temp_monthly_summary <- data %>%
+  group_by(Station, Year, Month) %>%
+  summarise(Avg_Mean_Temp = mean(CalculatedMeanTemp, na.rm = TRUE), .groups = 'drop')
+
+# 排序并选择前五的站点基于年平均温度
+top_stations_summary <- temp_monthly_summary %>%
+  group_by(Station) %>%
+  summarise(Avg_Mean_Temp= mean(Avg_Mean_Temp, na.rm = TRUE), .groups = 'drop') %>%
+  arrange(desc(Avg_Mean_Temp)) %>%
+  slice_head(n = 5)
+
+top5_stations <- top_stations_summary$Station
+
+# 分析前五个站点的平均温度
+Analyze_Top_Stations_Temp <- function(metric = "Avg_Mean_Temp", 
+                                      selected_stations = top5_stations,
+                                      plot_type = "boxviolin",
+                                      test_type = "nonparametric",
+                                      pairwise_display = "non-significant",
+                                      pairwise_comparison = TRUE,
+                                      confidence_level = 0.95,
+                                      exclude_outliers = TRUE) {
+  
+  # 根据所选指标筛选和准备数据
+  temp_filtered <- temp_monthly_summary %>%
+    filter(Station %in% selected_stations)
+  
+  
+  # 使用ggstatsplot进行可视化和统计分析
+  ggbetweenstats(data = temp_filtered,
+                 x = Station,
+                 y = !!rlang::sym(metric),
+                 type = test_type,
+                 pairwise.comparisons = pairwise_comparison,
+                 pairwise.display = pairwise_display,
+                 plot.type = plot_type,
+                 conf.level = confidence_level,
+                 xlab = "Station",
+                 ylab = "Monthly Average Temperature")
+}
+
+# 执行分析函数
+Analyze_Top_Stations_Temp()
+
+
+```
